@@ -1,4 +1,8 @@
-package inscriptions;
+package test;
+import inscriptions.Competition;
+import inscriptions.Equipe;
+import inscriptions.Inscriptions;
+import inscriptions.Personne;
 
 import static org.junit.jupiter.api.Assertions.*;
 

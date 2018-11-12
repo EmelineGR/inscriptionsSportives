@@ -41,7 +41,10 @@ public class Array {
 
 	@Test
 	public void testRemoveEquipe() {
-		fail("Not yet implemented");
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		Competition testcompetition = inscriptions.createCompetition("Competition", null, false);
+		testcompetition.delete();
+		assertEquals("",testcompetition.toString());
 	}
 
 	@Test

@@ -126,8 +126,5 @@ class TestInscription {
 		assertTrue(inscriptions.getCompetitions().contains(testcompetition3));
 		inscriptions = inscriptions.recharger();
 		assertFalse(inscriptions.getCompetitions().contains(testcompetition3));
-		
-		
-		
 	}
 }

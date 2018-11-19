@@ -20,8 +20,7 @@ class TestCompetition {
 	LocalDate eme = LocalDate.of(2014,3, 1);
 	@Test
 	public void inscrioOuverte() {
-		
-testcompetition.setDateCloture(eme);
-assertFalse(testcompetition.inscriptionsOuvertes());
+	testcompetition.setDateCloture(eme);
+	assertFalse(testcompetition.inscriptionsOuvertes());
 	}
 }

@@ -117,7 +117,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	{
 		// TODO Fait ! vérifier que la date de clôture n'est pas passée
 
-		if (enEquipe || !inscriptionsOuvertes())
+		if (enEquipe || ! inscriptionsOuvertes())
 			throw new RuntimeException();
 		personne.add(this);
 		return candidats.add(personne);

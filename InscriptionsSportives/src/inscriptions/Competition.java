@@ -57,7 +57,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public boolean inscriptionsOuvertes()
 	{
-		// TODO retourner vrai si et seulement si la date système est antérieure à la date de clôture.
+		// TODO Fait ! retourner vrai si et seulement si la date système est antérieure à la date de clôture.
 		LocalDate DateSys = LocalDate.now();
 		return DateSys.isBefore(getDateCloture());
 	}
@@ -90,8 +90,9 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public void setDateCloture(LocalDate dateCloture)
 	{
-		// TODO vérifier que l'on avance pas la date.
-		this.dateCloture = dateCloture;
+		// TODO Fait ! vérifier que l'on avance pas la date.
+		if (dateCloture.isAfter(this.dateCloture));
+			this.dateCloture = dateCloture;
 	}
 	
 	/**
@@ -114,8 +115,9 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public boolean add(Personne personne)
 	{
-		// TODO vérifier que la date de clôture n'est pas passée
-		if (enEquipe)
+		// TODO Fait ! vérifier que la date de clôture n'est pas passée
+
+		if (enEquipe || !inscriptionsOuvertes())
 			throw new RuntimeException();
 		personne.add(this);
 		return candidats.add(personne);
@@ -131,8 +133,8 @@ public class Competition implements Comparable<Competition>, Serializable
 
 	public boolean add(Equipe equipe)
 	{
-		// TODO vérifier que la date de clôture n'est pas passée
-		if (!enEquipe)
+		// TODO Fait ! vérifier que la date de clôture n'est pas passée
+		if (!enEquipe || !inscriptionsOuvertes())
 			throw new RuntimeException();
 		equipe.add(this);
 		return candidats.add(equipe);
@@ -145,8 +147,12 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public Set<Personne> getPersonnesAInscrire()
 	{
-		// TODO retourner les personnes que l'on peut inscrire à cette compétition.
-		return null;
+		// TODO Fait ! retourner les personnes que l'on peut inscrire à cette compétition.
+		Set<Personne> PersonneAInscrire = new TreeSet<>();
+		for (Personne personnes : inscriptions.getPersonnes())
+			if (getCandidats().contains(personnes))
+				PersonneAInscrire.add(personnes);
+		return PersonneAInscrire;
 	}
 
 	/**

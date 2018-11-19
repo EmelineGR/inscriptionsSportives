@@ -124,7 +124,7 @@ class TestInscription {
 		}
 		inscriptions = inscriptions.reinitialiser();
 		
-		assertTrue(inscriptions.getInscriptions().getInscriptions().);
+//		assertTrue(inscriptions.getInscriptions().getInscriptions());
 		
 		
 	}

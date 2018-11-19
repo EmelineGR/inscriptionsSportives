@@ -114,18 +114,17 @@ class TestInscription {
 	public void recharger() {
 
 	
-		try
-		{
-			inscriptions.sauvegarder();
-		} 
-		catch (IOException e)
-		{
-			System.out.println("Sauvegarde impossible." + e);
-		}
-		inscriptions = inscriptions.reinitialiser();
+	inscriptions = inscriptions.recharger();
+		assertTrue(inscriptions.getCompetitions().isEmpty());
 		
-//		assertTrue(inscriptions.getInscriptions().getInscriptions());
-		
-		
+	}
+	@Test
+	public void rechargerx() {
+
+	
+		Competition testcompetition3 = inscriptions.createCompetition("Competition", null, false);
+		assertTrue(inscriptions.getCompetitions().contains(testcompetition3));
+		inscriptions = inscriptions.recharger();
+		assertFalse(inscriptions.getCompetitions().contains(testcompetition3));
 	}
 }

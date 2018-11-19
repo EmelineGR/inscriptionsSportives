@@ -11,7 +11,7 @@ import inscriptions.Equipe;
 import inscriptions.Inscriptions;
 import inscriptions.Personne;
 
-class TestCompetition {
+class TestEquipe {
 	Inscriptions inscriptions = Inscriptions.getInscriptions();
 	Competition testcompetition = inscriptions.createCompetition("Competition", null, false);
 	Personne test = inscriptions.createPersonne("nom", "prenom", "mail");
@@ -19,8 +19,8 @@ class TestCompetition {
 	Competition testcompetition2 = inscriptions.createCompetition("Competition", null, false);
 	LocalDate eme = LocalDate.of(2014,3, 1);
 	@Test
-	public void inscrioOuverte() {
-	testcompetition.setDateCloture(eme);
-	assertFalse(testcompetition.inscriptionsOuvertes());
+	void test() {
+		fail("Not yet implemented");
 	}
+
 }

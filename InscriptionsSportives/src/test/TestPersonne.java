@@ -1,61 +1,65 @@
 package test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.time.LocalDate;
+
+import org.junit.jupiter.api.Test;
+
 import inscriptions.Competition;
 import inscriptions.Equipe;
 import inscriptions.Inscriptions;
 import inscriptions.Personne;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.io.IOException;
-import java.util.Collections;
-import java.util.Set;
-
-import org.junit.jupiter.api.Test;
-
 class TestPersonne {
+	Inscriptions inscriptions = Inscriptions.getInscriptions();
+	Competition testcompetition = inscriptions.createCompetition("Competition", null, false);
+	Personne test = inscriptions.createPersonne("nom", "prenom", "mail");
+	Equipe testEquipe = inscriptions.createEquipe("Les Manouches");
+	Competition testcompetition2 = inscriptions.createCompetition("Competition", null, false);
+	LocalDate eme = LocalDate.of(2014,3, 1);
+
 
 	@Test
-	void test() {
-		Inscriptions inscriptions = Inscriptions.getInscriptions();
-		Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes", null, false);
-		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
-				boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
-		flechettes.add(tony);
-		Equipe lesManouches = inscriptions.createEquipe("Les Manouches");
-		lesManouches.add(boris);
-		lesManouches.add(tony);
-		System.out.println(inscriptions);
-		lesManouches.delete();
-		System.out.println(inscriptions);
-		try
-		{
-			inscriptions.sauvegarder();
-		} 
-		catch (IOException e)
-		{
-			System.out.println("Sauvegarde impossible." + e);
-		}
-	
+	public void testGetSetPrenom() {
+		/**
+		 * personne get et set prenom
+		 */
+
+	test.setPrenom("marche");
+	assertEquals("marche", test.getPrenom());
 	}
 
-	
-	
+	@Test
+	public void testGetSetMail() {
+		/**
+		 * personne get set mail
+		 */
 
+		test.setMail("marche");
+		assertEquals("marche", test.getMail());
+	}
+	@Test
+	public void testGetSetNom() {
+
+		test.setNom("marche");
+		assertEquals("marche", test.getNom());
+	}
+
+	@Test
+	public void getAddEquipes() {
+testEquipe.add(test);
+assertTrue(test.getEquipes().contains(testEquipe));
+		
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Test
+	public void remove() {
+		testEquipe.add(test);
+		assertTrue(test.getEquipes().contains(testEquipe));
+		
+		testEquipe.remove(test);
+		assertFalse(test.getEquipes().contains(testEquipe));
+	}
 }

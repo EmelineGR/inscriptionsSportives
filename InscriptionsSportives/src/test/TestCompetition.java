@@ -17,10 +17,10 @@ class TestCompetition {
 	Personne test = inscriptions.createPersonne("nom", "prenom", "mail");
 	Equipe testEquipe = inscriptions.createEquipe("Les Manouches");
 	Competition testcompetition2 = inscriptions.createCompetition("Competition", null, false);
-	
+	LocalDate eme = LocalDate.of(2014,3, 1);
 	@Test
 	public void inscrioOuverte() {
-		LocalDate eme = LocalDate.of(2014,3, 1);
+		
 testcompetition.setDateCloture(eme);
 assertFalse(testcompetition.inscriptionsOuvertes());
 	}

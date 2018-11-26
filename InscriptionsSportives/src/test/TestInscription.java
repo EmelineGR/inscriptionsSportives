@@ -33,6 +33,7 @@ class TestInscription {
 
 	}
 	
+	
 	@Test
 	public void getCandidats() {
 		assertTrue(inscriptions.getCandidats().contains(testEquipe));
@@ -104,7 +105,7 @@ class TestInscription {
 	@Test
 	public void reinitialiser() {
 
-	
+
 	inscriptions = inscriptions.reinitialiser();
 		assertTrue(inscriptions.getCompetitions().isEmpty());
 		
@@ -112,19 +113,43 @@ class TestInscription {
 	
 	@Test
 	public void recharger() {
-
 	
+		Personne test2 = inscriptions.createPersonne("jo", "prenom", "mail");
+		assertTrue(inscriptions.getPersonnes().contains(test2));
 	inscriptions = inscriptions.recharger();
-		assertTrue(inscriptions.getCompetitions().isEmpty());
+	System.out.println(inscriptions);
+	assertFalse(inscriptions.getPersonnes().contains(test2));
+
 		
 	}
 	@Test
-	public void rechargerx() {
+	public void sauvegarder() {
+		Personne josiace = inscriptions.createPersonne("jo", "prenom", "mail");
+		assertTrue(inscriptions.getPersonnes().contains(josiace));
 
+		try
+		{
+		inscriptions.sauvegarder();
+		} 
+		catch (IOException e){
+			
+		}
+		
+		assertTrue(inscriptions.getPersonnes().contains(josiace));
+josiace.delete();
+
+
+
+try
+{
+inscriptions.sauvegarder();
+} 
+catch (IOException e){
 	
-		Competition testcompetition3 = inscriptions.createCompetition("Competition", null, false);
-		assertTrue(inscriptions.getCompetitions().contains(testcompetition3));
-		inscriptions = inscriptions.recharger();
-		assertFalse(inscriptions.getCompetitions().contains(testcompetition3));
+}
+inscriptions = inscriptions.recharger();
+		
 	}
+	
+	
 }

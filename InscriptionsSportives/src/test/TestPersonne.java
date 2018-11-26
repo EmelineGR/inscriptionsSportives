@@ -12,6 +12,7 @@ import inscriptions.Equipe;
 import inscriptions.Inscriptions;
 import inscriptions.Personne;
 
+
 class TestPersonne {
 	Inscriptions inscriptions = Inscriptions.getInscriptions();
 	Competition testcompetition = inscriptions.createCompetition("Competition", null, false);

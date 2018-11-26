@@ -150,7 +150,7 @@ public class Competition implements Comparable<Competition>, Serializable
 		// TODO Fait ! retourner les personnes que l'on peut inscrire à cette compétition.
 		Set<Personne> PersonneAInscrire = new TreeSet<>();
 		for (Personne personnes : inscriptions.getPersonnes())
-			if (getCandidats().contains(personnes))
+			if (!(getCandidats()).contains(personnes))
 				PersonneAInscrire.add(personnes);
 		return PersonneAInscrire;
 	}

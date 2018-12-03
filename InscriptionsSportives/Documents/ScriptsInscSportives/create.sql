@@ -2,9 +2,9 @@
 #        Script MySQL.
 #------------------------------------------------------------
 
-Drop database AssoSportive;
-Create database AssoSportive;
-Use AssoSportive; 
+Drop database inscSportives;
+Create database inscSportives;
+Use inscSportives; 
 
 #------------------------------------------------------------
 # Table: CANDIDAT

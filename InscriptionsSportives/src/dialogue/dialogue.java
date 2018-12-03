@@ -9,11 +9,7 @@ import commandLineMenus.Action;
 import commandLineMenus.List;
 import commandLineMenus.Menu;
 import commandLineMenus.Option;
-import commandLineMenus.examples.employees.core.Department;
-import commandLineMenus.examples.employees.core.Employee;
-import commandLineMenus.examples.employees.core.ImpossibleToSaveException;
-import commandLineMenus.examples.employees.core.ManageEmployees;
-import commandLineMenus.examples.employees.userDialog.PersonnelConsole;
+
 import inscriptions.Equipe;
 import inscriptions.Inscriptions;
 

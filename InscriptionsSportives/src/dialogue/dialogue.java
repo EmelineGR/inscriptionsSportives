@@ -7,11 +7,12 @@ import java.util.ArrayList;
 
 import commandLineMenus.Action;
 import commandLineMenus.List;
+import commandLineMenus.ListItemRenderer;
 import commandLineMenus.Menu;
 import commandLineMenus.Option;
-
 import inscriptions.Equipe;
 import inscriptions.Inscriptions;
+import inscriptions.Personne;
 
 public class dialogue 
 {
@@ -30,51 +31,12 @@ public class dialogue
 	private Menu menuPrincipal()
 	{
 		Menu menu = new Menu("Gestion du personnel des ligues");
-		menu.add(menuEquipe());
+		menu.add( new dequipe().menuEquipe());
+		menu.add(new dpersonne().menuPersonne());
 		menu.add(menuQuitter());
 		return menu;
 	}
 	
-	
-	
-	/// equipe ---------------------------------------------------------------------------
-	private Menu menuEquipe()
-	{
-		Menu menu = new Menu("Gérer les Equipes", "1");
-		menu.add(afficheEquipe());
-		menu.add(ajouterEquipe());
-		menu.add(selectionnerEquipe());
-		menu.addBack("q");
-		return menu;
-	}
-
-	private Option afficheEquipe()
-	{
-		return new Option("Afficher les Equipes", "1", () -> {System.out.println(dinscriptions.getEquipes());});
-	}
-	
-	private Option ajouterEquipe()
-	{
-		return new Option("Ajouter une Equipe", "2", () -> {dinscriptions.createEquipe(getString("nom : "));});
-	}
-	
-	private List<Equipe> selectionnerEquipe()
-	{
-		return new List<Equipe>("Sélectionner une Equipe", "3", 
-				() -> new ArrayList<>(dinscriptions.getEquipes()),
-				(element) -> editerEquipe(element)
-				);
-	}
-	
-	private Menu editerEquipe(Equipe equipe)
-	{
-		Menu menu = new Menu("Editer ");
-		menu.addBack("q");
-		return menu;
-	}
-
-	
-	/// equipe ---------------------------------------------------------------------------
 	private Menu menuQuitter()
 	{
 		Menu menu = new Menu("Quitter", "q");
@@ -84,8 +46,7 @@ public class dialogue
 		return menu;
 	}
 	
-
-
+	
 
 
 

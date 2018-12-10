@@ -3,6 +3,9 @@ package dialogue;
 import static commandLineMenus.rendering.examples.util.InOut.getString;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 
 import commandLineMenus.Action;
@@ -50,10 +53,18 @@ public class dcompetition {
 	{
 		return new Option("Afficher les Competitions", "1", () -> {System.out.println(dinscriptions.getCompetitions());});
 	}
+	
+	public static DateTimeFormatter ofLocalizedDateTime(FormatStyle dateTimeStyle)
+	{
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dateTimeStyle");
 		
+	}
+	
 	private Option ajouterCompetition()
 	{
-		return new Option("Ajouter une Competition", "2", () -> {dinscriptions.createCompetition(getString("nom : ") getLocalDate("Date Cloture : ") getBool("Compétition réservé aux équipes : "));});
+		return new Option("Ajouter une Competition", "2", () -> {dinscriptions.createCompetition(getString("nom : "), ofLocalizedDateTime.getString("Date Cloture (YYYY-MM-DD) : "), getString("Compétition réservé aux équipes : "));});
+		
+		
 	}
 	
 	private List<Competition> selectionnerCompetition()

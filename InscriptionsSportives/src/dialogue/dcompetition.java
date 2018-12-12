@@ -2,46 +2,21 @@ package dialogue;
 
 import static commandLineMenus.rendering.examples.util.InOut.getString;
 
-import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
-
-import commandLineMenus.Action;
 import commandLineMenus.List;
 import commandLineMenus.Menu;
 import commandLineMenus.Option;
 import inscriptions.Competition;
-import inscriptions.Equipe;
 import inscriptions.Inscriptions;
 
 public class dcompetition {
-
-	private Inscriptions dinscriptions;
 	
-	public dcompetition(Inscriptions inscriptions)
-	{
-		this.dinscriptions = inscriptions;
-	}
+	static Inscriptions dinscriptions = Inscriptions.getInscriptions();
 	
-	public void start()
+	Menu menuCompetition()
 	{
-		menuPrincipal().start();
-	}
-	
-	private Menu menuPrincipal()
-	{
-		Menu menu = new Menu("Gestion du personnel des ligues");
-		menu.add(menuCompetition());
-		menu.add(menuQuitter());
-		return menu;
-	}
-			
-	/// Competition ---------------------------------------------------------------------------
-	private Menu menuCompetition()
-	{
-		Menu menu = new Menu("Gérer les Equipes", "1");
+		Menu menu = new Menu("Gérer les Competitions", "3");
 		menu.add(afficheCompetition());
 		menu.add(ajouterCompetition());
 		menu.add(selectionnerCompetition());
@@ -54,17 +29,10 @@ public class dcompetition {
 		return new Option("Afficher les Competitions", "1", () -> {System.out.println(dinscriptions.getCompetitions());});
 	}
 	
-	public static DateTimeFormatter ofLocalizedDateTime(FormatStyle dateTimeStyle)
-	{
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dateTimeStyle");
-		
-	}
 	
 	private Option ajouterCompetition()
-	{
-		return new Option("Ajouter une Competition", "2", () -> {dinscriptions.createCompetition(getString("nom : "), ofLocalizedDateTime.getString("Date Cloture (YYYY-MM-DD) : "), getString("Compétition réservé aux équipes : "));});
-		
-		
+	{		
+		return new Option("Ajouter une Competition", "2", () -> {dinscriptions.createCompetition(getString("Nom de la Compétition : "), LocalDate.parse(getString("Date Cloture (YYYY-MM-DD) : ")), Boolean.parseBoolean(getString("Compétition réservé aux équipes (O/N) : ")) );});
 	}
 	
 	private List<Competition> selectionnerCompetition()
@@ -77,49 +45,25 @@ public class dcompetition {
 		
 	private Menu editerCompetition(Competition competition)
 	{
-		Menu menu = new Menu("Editer ");
+		Menu menu = new Menu("Editer"+ competition.getNom());
+		menu.add(afficherInfoComp(competition));
+		menu.add(supprimerCompetition(competition));
+		menu.add(new dcandidat().menuCandidats(competition));
 		menu.addBack("q");
 		return menu;
 	}
-
-		
-	/// Compétition ---------------------------------------------------------------------------
-	private Menu menuQuitter()
+	
+	private Option afficherInfoComp(Competition competition)
 	{
-		Menu menu = new Menu("Quitter", "q");
-		menu.add(quitterEtEnregistrer());
-		menu.add(quitterSansEnregistrer());
-		menu.addBack("r");
-		return menu;
+	
+		return new Option("Afficher les détails de la compétition", "1", () -> {System.out.println(competition.getNom() + " " + competition.getDateCloture().toString() + " " + String.valueOf(competition.estEnEquipe()));});
+				
 	}
-		
-		
-	private Option quitterEtEnregistrer()
+
+	private Option supprimerCompetition(Competition competition) 
 	{
-		return new Option("Quitter et enregistrer", "q", 
-				() -> 
-				{
-					try
-					{
-						dinscriptions.sauvegarder();
-						Action.QUIT.optionSelected();
-					} 
-					catch (IOException e)
-					{
-						System.out.println("Impossible d'effectuer la sauvegarde");
-					}
-				}
-			);
+		return new Option("Supprimer " + competition.getNom(), "2", () -> {competition.delete();});
 	}
 	
-	private Option quitterSansEnregistrer()
-	{
-		return new Option("Quitter sans enregistrer", "a", Action.QUIT);
-	}
-			
-	public static void main(String[] args)
-	{
-		dialogue dialogue = new dialogue(Inscriptions.getInscriptions());
-			dialogue.start();		
-	}
+		
 }

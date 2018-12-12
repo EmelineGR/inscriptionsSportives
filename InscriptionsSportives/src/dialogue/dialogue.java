@@ -1,18 +1,11 @@
 package dialogue;
 
-import static commandLineMenus.rendering.examples.util.InOut.getString;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
 import commandLineMenus.Action;
-import commandLineMenus.List;
-import commandLineMenus.ListItemRenderer;
 import commandLineMenus.Menu;
 import commandLineMenus.Option;
-import inscriptions.Equipe;
 import inscriptions.Inscriptions;
-import inscriptions.Personne;
 
 public class dialogue 
 {
@@ -33,6 +26,7 @@ public class dialogue
 		Menu menu = new Menu("Gestion du personnel des ligues");
 		menu.add( new dequipe().menuEquipe());
 		menu.add(new dpersonne().menuPersonne());
+		menu.add(new dcompetition().menuCompetition());
 		menu.add(menuQuitter());
 		return menu;
 	}
@@ -46,10 +40,6 @@ public class dialogue
 		return menu;
 	}
 	
-	
-
-
-
 	
 	private Option quitterEtEnregistrer()
 	{

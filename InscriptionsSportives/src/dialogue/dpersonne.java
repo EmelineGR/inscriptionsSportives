@@ -16,7 +16,7 @@ public class dpersonne {
 	///  personne---------------------------------------------------------------------------
 	protected Menu menuPersonne()
 	{
-		Menu menu = new Menu("GÃ©rer les Personnes", "2");
+		Menu menu = new Menu("Gérer les Personnes", "2");
 		menu.add(affichePersonnes());
 		menu.add(ajouterPersonnes());
 		menu.add(selectionnerPersonnes());
@@ -36,7 +36,7 @@ public class dpersonne {
 	
 	private List<Personne> selectionnerPersonnes()
 	{
-		return new List<Personne>("SÃ©lectionner une Personnes", "3", 
+		return new List<Personne>("Sélectionner une Personnes", "3", 
 				() -> new ArrayList<>(dinscriptions.getPersonnes()),
 				(element) -> editerPersonnes(element)
 				);
@@ -66,23 +66,23 @@ public class dpersonne {
 	
 	private Option 	afficherCompetitions(Personne personne)
 	{
-		return new Option("afficher les competitions", "3", () -> { System.out.println(personne.getCompetitions()); });
+		return new Option("Afficher les competitions", "3", () -> { System.out.println(personne.getCompetitions()); });
 	}
 	
 	private Option 	supprimerPersonne(Personne personne)
 	{
-		return new Option("supprimer la personne", "5", () -> {personne.delete(); });
+		return new Option("Supprimer la personne", "5", () -> {personne.delete(); });
 	}
 	
 	private Option  afficherEquipe(Personne personne)
 	{
-		return new Option("afficher les Equipes", "4", () -> { System.out.println(personne.getEquipes()); });
+		return new Option("Afficher les Equipes", "4", () -> { System.out.println(personne.getEquipes()); });
 	}
 	
 	
 	private Option afficheinfo(Personne personne)
 	{
-		return new Option("afficher informations", "1", () -> { System.out.println(personne.getNom() + " " + personne.getPrenom() + " " + personne.getMail()); });
+		return new Option("Afficher informations", "1", () -> { System.out.println(personne.getNom() + " " + personne.getPrenom() + " " + personne.getMail()); });
 	}
 	
 	
@@ -97,17 +97,17 @@ public class dpersonne {
 	}
 	private Option nom(Personne personne)
 	{
-		return new Option("modifier nom", "1", () -> { personne.setNom(getString("nom : ")); });
+		return new Option("Modifier nom", "1", () -> { personne.setNom(getString("Nom : ")); });
 	}
 	
 	private Option prenom(Personne personne)
 	{
-		return new Option("modifier prenom", "2", () -> { personne.setPrenom(getString("prenom : ")); });
+		return new Option("Modifier prenom", "2", () -> { personne.setPrenom(getString("Prenom : ")); });
 	}
 	
 	private Option mail(Personne personne)
 	{
-		return new Option("modifier mail", "3", () -> { personne.setMail(getString("mail : ")); });
+		return new Option("Modifier mail", "3", () -> { personne.setMail(getString("Mail : ")); });
 	}
 	///  personne---------------------------------------------------------------------------
 

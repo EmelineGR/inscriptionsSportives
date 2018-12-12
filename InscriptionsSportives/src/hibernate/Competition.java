@@ -1,4 +1,4 @@
-package hibernate.gestionCompetition;
+package hibernate;
 
 import java.time.LocalDate;
 

@@ -52,7 +52,7 @@ class TestCompetition {
 	
 	
 	@Test
-	public void getdatecloture() {
+	public void getsetdatecloture() {
 		testcompetition.setDateCloture(eme);
 		LocalDate eme2 = testcompetition.getDateCloture();
 	assertEquals(eme,eme2);

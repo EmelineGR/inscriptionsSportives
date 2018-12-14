@@ -45,7 +45,7 @@ public class dcompetition {
 		
 	private Menu editerCompetition(Competition competition)
 	{
-		Menu menu = new Menu("Editer"+ competition.getNom());
+		Menu menu = new Menu("Editer"+ " " + competition.getNom());
 		menu.add(afficherInfoComp(competition));
 		menu.add(supprimerCompetition(competition));
 		menu.add(new dcandidat().menuCandidats(competition));
@@ -62,7 +62,7 @@ public class dcompetition {
 
 	private Option supprimerCompetition(Competition competition) 
 	{
-		return new Option("Supprimer " + competition.getNom(), "2", () -> {competition.delete();});
+		return new Option("Supprimer " + " " + competition.getNom(), "2", () -> {competition.delete();});
 	}
 	
 		

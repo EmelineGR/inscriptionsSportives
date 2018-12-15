@@ -4,11 +4,8 @@ import static commandLineMenus.rendering.examples.util.InOut.getString;
 
 import java.util.ArrayList;
 
-import commandLineMenus.List;
-import commandLineMenus.Menu;
-import commandLineMenus.Option;
-import inscriptions.Inscriptions;
-import inscriptions.Personne;
+import commandLineMenus.*;
+import inscriptions.*;
 
 public class dpersonne {
 	
@@ -31,7 +28,7 @@ public class dpersonne {
 	
 	private Option ajouterPersonnes()
 	{
-		return new Option("Ajouter une Personnes", "2", () -> {dinscriptions.createPersonne(getString("nom : "),getString("prenom : "),getString("mail : "));});
+		return new Option("Ajouter une Personnes", "2", () -> {dinscriptions.createPersonne(getString("Nom : "),getString("Prenom : "),getString("Mail : "));});
 	}
 	
 	private List<Personne> selectionnerPersonnes()
@@ -41,12 +38,6 @@ public class dpersonne {
 				(element) -> editerPersonnes(element)
 				);
 	}
-	
-	
-	
-	
-	
-	
 	
 
 	private Menu editerPersonnes(Personne personne)
@@ -62,54 +53,49 @@ public class dpersonne {
 		return menu;
 	}
 
-
+		private Option afficheinfo(Personne personne)
+		{
+			return new Option("Afficher informations", "1", () -> { System.out.println(personne.getNom() + " " + personne.getPrenom() + " " + personne.getMail()); });
+		}
+		
+		private Menu modifier(Personne personne)
+		{
+			Menu menu = new Menu("Editer " +  personne.getNom(),"2");
+			menu.add(nom(personne));
+			menu.add(prenom(personne));
+			menu.add(mail(personne));
+			menu.addBack("q");
+			return menu;
+		}
+				private Option nom(Personne personne)
+				{
+					return new Option("Modifier nom", "1", () -> { personne.setNom(getString("Nom : ")); });
+				}
+				
+				private Option prenom(Personne personne)
+				{
+					return new Option("Modifier prenom", "2", () -> { personne.setPrenom(getString("Prenom : ")); });
+				}
+				
+				private Option mail(Personne personne)
+				{
+					return new Option("Modifier mail", "3", () -> { personne.setMail(getString("Mail : ")); });
+				}
+		
+		
+		private Option 	afficherCompetitions(Personne personne)
+		{
+			return new Option("Afficher les competitions", "3", () -> { System.out.println(personne.getCompetitions()); });
+		}
+		
+		private Option  afficherEquipe(Personne personne)
+		{
+			return new Option("Afficher les Equipes", "4", () -> { System.out.println(personne.getEquipes()); });
+		}
 	
-	private Option 	afficherCompetitions(Personne personne)
-	{
-		return new Option("Afficher les competitions", "3", () -> { System.out.println(personne.getCompetitions()); });
-	}
-	
-	private Option 	supprimerPersonne(Personne personne)
-	{
-		return new Option("Supprimer la personne", "5", () -> {personne.delete(); });
-	}
-	
-	private Option  afficherEquipe(Personne personne)
-	{
-		return new Option("Afficher les Equipes", "4", () -> { System.out.println(personne.getEquipes()); });
-	}
-	
-	
-	private Option afficheinfo(Personne personne)
-	{
-		return new Option("Afficher informations", "1", () -> { System.out.println(personne.getNom() + " " + personne.getPrenom() + " " + personne.getMail()); });
-	}
-	
-	
-	private Menu modifier(Personne personne)
-	{
-		Menu menu = new Menu("Editer " +  personne.getNom(),"2");
-		menu.add(nom(personne));
-		menu.add(prenom(personne));
-		menu.add(mail(personne));
-		menu.addBack("q");
-		return menu;
-	}
-	private Option nom(Personne personne)
-	{
-		return new Option("Modifier nom", "1", () -> { personne.setNom(getString("Nom : ")); });
-	}
-	
-	private Option prenom(Personne personne)
-	{
-		return new Option("Modifier prenom", "2", () -> { personne.setPrenom(getString("Prenom : ")); });
-	}
-	
-	private Option mail(Personne personne)
-	{
-		return new Option("Modifier mail", "3", () -> { personne.setMail(getString("Mail : ")); });
-	}
-	///  personne---------------------------------------------------------------------------
-
+		private Option 	supprimerPersonne(Personne personne)
+		{
+			return new Option("Supprimer la personne", "5", () -> {personne.delete(); });
+		}
 
 }

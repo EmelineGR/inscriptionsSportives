@@ -4,11 +4,8 @@ import static commandLineMenus.rendering.examples.util.InOut.getString;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import commandLineMenus.List;
-import commandLineMenus.Menu;
-import commandLineMenus.Option;
-import inscriptions.Competition;
-import inscriptions.Inscriptions;
+import commandLineMenus.*;
+import inscriptions.*;
 
 public class dcompetition {
 	

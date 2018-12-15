@@ -2,22 +2,20 @@ package dialogue;
 
 import java.util.ArrayList;
 
-import commandLineMenus.List;
-import commandLineMenus.Menu;
-import commandLineMenus.Option;
-import inscriptions.Competition;
-import inscriptions.Equipe;
-import inscriptions.Inscriptions;
-import inscriptions.Personne;
+import commandLineMenus.*;
+import inscriptions.*;
 
 
 public class dcandidat {
 	
 	static Inscriptions dinscriptions = Inscriptions.getInscriptions();
+	final ArrayList<Candidat> Candidats = new ArrayList<>();
+	private Competition competition;
 	
-
 	Menu menuCandidats(Competition competition)
 	{
+		this.competition = competition;
+		
 		for(Candidat candidat : dinscriptions.getCandidats())
 		{
 			if((candidat instanceof Equipe && competition.estEnEquipe()) && !competition.getCandidats().contains(candidat) ||
@@ -29,31 +27,42 @@ public class dcandidat {
 		
 		Menu menu = new Menu("Gérer les Candidats", "3");
 		menu.add(affiCandidat(competition));
-		menu.add(selectCandidat(competition));
+		menu.add(MenusupprCandidat(competition));
+		
+		
+		
 		return menu;
 	}
 	
 	
 	private Option affiCandidat(Competition competition)
 	{
-		return new Option("Afficher les Candidats de " + competition.getNom(), "1", () ->{System.out.println(competition.getCandidats());});
-	}
-		
-	private List<Candidat> selectionnerMembres(Competition competition)
-	{	
-		return new List<Candidat>("Supprimer membres" , "1", 
-				() -> new ArrayList<>(competition.getCandidats()),
-				(element) -> suprCandidat(element,equipe)
-				);
+		return new Option("Afficher les Candidats de " + competition.getNom(), "1", () ->{Candidats.forEach(candidat->System.out.println(candidat));});
 	}
 	
-	private Option suprCandidat(Candidat element ,Competition competition)
+	private Menu menusupprCandidat(Competition competition)
 	{
-		return new Option("Supprimer le Candidat" , "", () -> {equipe.remove(element);});
+		// Creates a menu with an option for each people in the list
+		List<Candidat> menu = new List<Candidat>("Suppression d'un candidat","2",
+				new ListData<Candidat>()		
+				{
+					// Returns the data needed to refresh the list 
+					// each time it is displayed. 
+					public java.util.List<Candidat> getList()
+					{
+						return Candidats;
+					}	
+				},
+				new ListAction<Candidat>()
+				{				
+					// Triggered each time an item is selected
+					public void itemSelected(int index, Candidat candidat)
+					{
+						competition.remove(candidat);
+						System.out.println("Vous avez supprimé " + candidat.getNom());
+					}
+				});
+		return menu;
 	}
 	
-	/*private Option selectCandidat(Competition competition)
-	{
-		return null;
-	}*/
 }

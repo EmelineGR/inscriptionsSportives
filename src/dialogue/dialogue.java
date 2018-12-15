@@ -2,10 +2,8 @@ package dialogue;
 
 import java.io.IOException;
 
-import commandLineMenus.Action;
-import commandLineMenus.Menu;
-import commandLineMenus.Option;
-import inscriptions.Inscriptions;
+import commandLineMenus.*;
+import inscriptions.*;
 
 public class dialogue 
 {
@@ -43,7 +41,7 @@ public class dialogue
 	
 	private Option quitterEtEnregistrer()
 	{
-		return new Option("Quitter et enregistrer", "q", 
+		return new Option("Quitter et enregistrer", "qe", 
 				() -> 
 				{
 					try
@@ -61,7 +59,7 @@ public class dialogue
 	
 	private Option quitterSansEnregistrer()
 	{
-		return new Option("Quitter sans enregistrer", "a", Action.QUIT);
+		return new Option("Quitter sans enregistrer", "qsa", Action.QUIT);
 	}
 	
 

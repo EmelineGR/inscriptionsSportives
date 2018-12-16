@@ -154,6 +154,20 @@ public class Competition implements Comparable<Competition>, Serializable
 				PersonneAInscrire.add(personnes);
 		return PersonneAInscrire;
 	}
+	/**
+	 * Retourne les equipes que l'on peut inscrire à cette competition.
+	 * @return les equipes que l'on peut inscrire à cette compétition.
+	 */
+	/*ajouter pour les dialogues*/
+	public Set<Equipe> getEquipesAInscrire()
+	{
+		
+		Set<Equipe> EquipeAInscrire = new TreeSet<>();
+		for (Equipe equipes : inscriptions.getEquipes())
+			if (!(getCandidats()).contains(equipes))
+				EquipeAInscrire.add(equipes);
+		return EquipeAInscrire;
+	}
 
 	/**
 	 * Désinscrit un candidat.

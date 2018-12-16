@@ -61,6 +61,4 @@ public class dcompetition {
 	{
 		return new Option("Supprimer " + " " + competition.getNom(), "2", () -> {competition.delete();});
 	}
-	
-		
 }

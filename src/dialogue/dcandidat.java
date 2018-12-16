@@ -16,7 +16,14 @@ public class dcandidat {
 	{
 		Menu menu = new Menu("Editer Candidat", "3");
 		menu.add(afficherCandidats(competition));
-		menu.add(ajoutCandidat(competition));
+
+		if (competition.estEnEquipe()) {
+			menu.add(ajoutEquipe(competition));
+		}
+		else if (!(competition.estEnEquipe())) {
+			menu.add(ajoutPersonne(competition));
+		}
+		
 		menu.add(selectionnerEquipe(competition));
 		menu.addBack("q");
 		return menu;
@@ -28,27 +35,19 @@ public class dcandidat {
 	}
 	
 	
-	private Option ajoutCandidat(Competition competition)
-	{
-		if (competition.estEnEquipe() && competition.inscriptionsOuvertes())
-			return ajoutEquipe(competition);
-		else if (!competition.estEnEquipe() && competition.inscriptionsOuvertes())
-			return ajoutPersonne(competition);
-		else 
-			return afficherCandidats(competition);
-	}
+
 	
-	private List<Personne> ajoutPersonne(final Competition competition)
+	private List<Personne> ajoutPersonne(Competition competition)
 	{
-		return new List<>("Ajouter une Personne", "2", 
+		return new List<Personne>("Ajouter une Personne", "2", 
 				() -> new ArrayList<>(competition.getPersonnesAInscrire()),
 				(index, element) -> {competition.add(element);}
 				);
 	}
 	
-	private List<Equipe> ajoutEquipe(final Competition competition)
+	private List<Equipe> ajoutEquipe(Competition competition)
 	{
-		return new List<>("Ajouter une Equipe", "2", 
+		return new List<Equipe>("Ajouter une Equipe", "2", 
 				() -> new ArrayList<>(competition.getEquipesAInscrire()),
 				(index, element) -> {competition.add(element);}
 				);

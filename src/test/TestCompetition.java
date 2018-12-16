@@ -46,6 +46,8 @@ class TestCompetition {
 	public void inscrioOuverte() {
 		testcompetition.setDateCloture(eme);
 	assertTrue(testcompetition.inscriptionsOuvertes());
+	testcompetition.setDateCloture(eme3);
+assertFalse(testcompetition.inscriptionsOuvertes());
 	}
 	
 	

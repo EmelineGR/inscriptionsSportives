@@ -19,7 +19,7 @@ abstract class Passerelle
 		try
 		{
 			Configuration configuration = new Configuration()
-					.configure("hibernate/hibernate.cfg.xml");
+					.configure("hibernate.cfg.xml");
 			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 					.applySettings(configuration.getProperties()).build();
 			sessionFactory = configuration.buildSessionFactory(serviceRegistry);
@@ -30,15 +30,6 @@ abstract class Passerelle
 			throw new RuntimeException("Probleme de configuration : "
 					+ ex.getMessage(), ex);
 		}
-		
-	}
-	
-	public static void main(String[] args)
-	{
-		Personne personne = new Personne();
-		personne.setNom("nomTest");
-		personne.setPrenom("prenomTest");
-		save(personne);
 	}
 
 //	static void delete(Contact personne)

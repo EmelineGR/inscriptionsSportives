@@ -16,14 +16,14 @@ public class dcandidat {
 	{
 		Menu menu = new Menu("Editer Candidat", "3");
 		menu.add(afficherCandidats(competition));
-
+if(competition.inscriptionsOuvertes()) {
 		if (competition.estEnEquipe()) {
 			menu.add(ajoutEquipe(competition));
 		}
 		else if (!(competition.estEnEquipe())) {
 			menu.add(ajoutPersonne(competition));
 		}
-		
+}
 		menu.add(selectionnerEquipe(competition));
 		menu.addBack("q");
 		return menu;

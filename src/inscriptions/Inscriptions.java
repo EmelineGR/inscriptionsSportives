@@ -257,6 +257,8 @@ public class Inscriptions implements Serializable
 		System.out.println(inscriptions);
 		lesManouches.delete();
 		System.out.println(inscriptions);
+	
+
 		try
 		{
 			inscriptions.sauvegarder();

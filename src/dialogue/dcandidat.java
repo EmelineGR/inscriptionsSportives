@@ -14,7 +14,7 @@ public class dcandidat {
 
 	Menu menuCandidats(Competition competition)
 	{
-		Menu menu = new Menu("Editer Candidat", "3");
+		Menu menu = new Menu("Editer Candidat", "4");
 		menu.add(afficherCandidats(competition));
 if(competition.inscriptionsOuvertes()) {
 		if (competition.estEnEquipe()) {
@@ -34,7 +34,7 @@ if(competition.inscriptionsOuvertes()) {
 		return new Option("Affichez les Candidats", "1", () -> {System.out.println(competition.getCandidats());});
 	}
 	
-	
+
 
 	
 	private List<Personne> ajoutPersonne(Competition competition)

@@ -44,6 +44,7 @@ public class dcompetition {
 	{
 		Menu menu = new Menu("Editer"+ " " + competition.getNom());
 		menu.add(afficherInfoComp(competition));
+		menu.add(modifierCompetition(competition));
 		menu.add(supprimerCompetition(competition));
 		menu.add(new dcandidat().menuCandidats(competition));
 		menu.addBack("q");
@@ -59,6 +60,27 @@ public class dcompetition {
 
 	private Option supprimerCompetition(Competition competition) 
 	{
-		return new Option("Supprimer " + " " + competition.getNom(), "2", () -> {competition.delete();});
+		return new Option("Supprimer " + " " + competition.getNom(), "3", () -> {competition.delete();});
 	}
+	
+	private Menu modifierCompetition(Competition competition)
+	{
+		Menu menu = new Menu("modifier " +  competition.getNom(),"2");
+		menu.add(nomComp(competition));
+		menu.add(dateCloture(competition));
+		menu.addBack("q");
+		return menu;
+	}
+	
+	private Option nomComp(Competition competition) 
+	{
+		return new Option("Modifier nom", "1", () -> { competition.setNom(getString("Nom : ")); });
+	}
+
+	private Option dateCloture(Competition competition) 
+	{
+		return new Option("Modifier date de cloture", "2", () -> { competition.setDateCloture(LocalDate.parse(getString("Date Cloture (YYYY-MM-DD) : "))); });
+	}
+	
+
 }

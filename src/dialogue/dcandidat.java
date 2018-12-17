@@ -1,7 +1,5 @@
 package dialogue;
 
-import static commandLineMenus.rendering.examples.util.InOut.getString;
-
 import java.util.ArrayList;
 
 import commandLineMenus.*;
@@ -16,15 +14,18 @@ public class dcandidat {
 	{
 		Menu menu = new Menu("Editer Candidat", "4");
 		menu.add(afficherCandidats(competition));
-if(competition.inscriptionsOuvertes()) {
-		if (competition.estEnEquipe()) {
-			menu.add(ajoutEquipe(competition));
+		
+		if(competition.inscriptionsOuvertes()) {
+			if (competition.estEnEquipe()) {
+				menu.add(ajoutEquipe(competition));
+			}
+			else if (!(competition.estEnEquipe())) {
+				menu.add(ajoutPersonne(competition));
+				
+			}
 		}
-		else if (!(competition.estEnEquipe())) {
-			menu.add(ajoutPersonne(competition));
-		}
-}
-		menu.add(selectionnerEquipe(competition));
+		menu.add(selectionnerCandidat(competition));
+		
 		menu.addBack("q");
 		return menu;
 	}
@@ -53,7 +54,7 @@ if(competition.inscriptionsOuvertes()) {
 				);
 	}
 	
-	private List<Candidat> selectionnerEquipe(Competition competition)
+	private List<Candidat> selectionnerCandidat(Competition competition)
 	{	
 		return new List<Candidat>("Supprimer un candidat" , "3", 
 				() -> new ArrayList<>(competition.getCandidats()),

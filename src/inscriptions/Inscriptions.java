@@ -11,9 +11,6 @@ import java.time.LocalDate;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import commandLineMenus.examples.employees.core.ManageEmployees;
-import commandLineMenus.examples.employees.userDialog.PersonnelConsole;
-
 /**
  * Point d'entrée dans l'application, un seul objet de type Inscription
  * permet de gérer les compétitions, candidats (de type equipe ou personne)

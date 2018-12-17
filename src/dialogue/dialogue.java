@@ -22,7 +22,7 @@ public class dialogue
 	private Menu menuPrincipal()
 	{
 		Menu menu = new Menu("Gestion du personnel des ligues");
-		menu.add( new dequipe().menuEquipe());
+		menu.add(new dequipe().menuEquipe());
 		menu.add(new dpersonne().menuPersonne());
 		menu.add(new dcompetition().menuCompetition());
 		menu.add(menuQuitter());

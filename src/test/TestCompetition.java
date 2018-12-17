@@ -58,14 +58,7 @@ assertFalse(testcompetition.inscriptionsOuvertes());
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	@Test
 	public void testGetSetMail() {

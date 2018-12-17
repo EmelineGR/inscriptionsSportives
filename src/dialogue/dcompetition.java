@@ -29,7 +29,7 @@ public class dcompetition {
 	
 	private Option ajouterCompetition()
 	{		
-		return new Option("Ajouter une Competition", "2", () -> {dinscriptions.createCompetition(getString("Nom de la Compétition : "), LocalDate.parse(getString("Date Cloture (YYYY-MM-DD) : ")), Boolean.parseBoolean(getString("Compétition réservé aux équipes (O/N) : ")) );});
+		return new Option("Ajouter une Competition", "2", () -> {dinscriptions.createCompetition(getString("Nom de la Compétition : "), LocalDate.parse(getString("Date Cloture (YYYY-MM-DD) : ")), Boolean.parseBoolean(getString("Compétition réservé aux équipes (true/false) : ")) );});
 	}
 	
 	private List<Competition> selectionnerCompetition()

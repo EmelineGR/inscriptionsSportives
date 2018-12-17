@@ -23,8 +23,9 @@ public class dcandidat {
 				menu.add(ajoutPersonne(competition));
 				
 			}
+			menu.add(selectionnerCandidat(competition));
 		}
-		menu.add(selectionnerCandidat(competition));
+
 		
 		menu.addBack("q");
 		return menu;

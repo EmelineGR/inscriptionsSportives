@@ -34,7 +34,7 @@ abstract class Passerelle
 	}
 
 //	static void delete(Contact personne)
-//	{ 
+//	{
 //		Transaction tx = session.beginTransaction();
 //		session.delete(personne);
 //		tx.commit();

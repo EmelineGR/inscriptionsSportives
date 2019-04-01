@@ -71,8 +71,8 @@ INSERT INTO `competition` (`Num_Competition`, `Nom_Competition`, `DateCloture_Co
 --
 
 CREATE TABLE IF NOT EXISTS `composer` (
-  `Num_Candidat` int(11) NOT NULL,
-  `Num_Candidat_PERSONNE` int(11) NOT NULL,
+  `Num_Equipe` int(11) NOT NULL,
+  `Num_Personne` int(11) NOT NULL,
   PRIMARY KEY (`Num_Candidat`,`Num_Candidat_PERSONNE`),
   KEY `COMPOSER_PERSONNE0_FK` (`Num_Candidat_PERSONNE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

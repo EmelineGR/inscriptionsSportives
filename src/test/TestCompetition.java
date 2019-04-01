@@ -84,6 +84,7 @@ assertTrue(testcompetition2.getCandidats().contains(testEquipe));
 		
 		testEquipe.remove(test);
 		assertFalse(test.getEquipes().contains(testEquipe));
+		assertFalse(testEquipe.getMembres().contains(test));
 	}
 	
 	

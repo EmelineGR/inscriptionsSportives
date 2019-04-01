@@ -2,16 +2,17 @@ package hibernate;
 
 import java.time.LocalDate;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity
+@Entity @Table( name = "Competition")
 class Competition
 {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	 @Id @GeneratedValue( strategy=GenerationType.IDENTITY )// permet de dire que num  competition  est la clé primaire
 	private int Num_Competition;
 
 	private String Nom_Competition;

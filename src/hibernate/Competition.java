@@ -19,6 +19,17 @@ class Competition
 
 	private LocalDate DateCloture_Comp;
 
+	private boolean enEquipe = false;
+	
+	
+	public boolean isEnEquipe() {
+		return enEquipe;
+	}
+
+	public void setEnEquipe(boolean enEquipe) {
+		this.enEquipe = enEquipe;
+	}
+
 	Competition()
 	{
 	}

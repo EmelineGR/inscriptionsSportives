@@ -14,7 +14,10 @@ public class consolejpa {
 	 public static void main(String[] args) throws Exception {
 Passerelle.open();
 hibernate.Competition emeline = new hibernate.Competition();
-Passerelle.save(emeline);
+Passerelle.savex(emeline);
+
+
+
 }
 	    
 

@@ -44,7 +44,8 @@ public class dialogue
 		return new Option("Quitter et enregistrer", "qe", 
 				() -> 
 				{
-					Passerelle.save(dinscriptions);
+					
+					Passerelle.InitSave(dinscriptions);
 					Action.QUIT.optionSelected();
 				}
 			);

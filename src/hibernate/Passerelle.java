@@ -1,81 +1,59 @@
 package hibernate;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-
-import inscriptions.Inscriptions;
-import hibernate.consolejpa;
-public class Passerelle
+public abstract class Passerelle
 {
-	private static Session session = null;
-
-	static
-	{
-		SessionFactory sessionFactory = null;
-		try
-		{
-			Configuration configuration = new Configuration()
-					.configure("hibernate.cfg.xml");
-			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-					.applySettings(configuration.getProperties()).build();
-			sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-			session = sessionFactory.openSession();
-		}
-		catch (HibernateException ex)
-		{
-			throw new RuntimeException("Probleme de configuration : "
-					+ ex.getMessage(), ex);
-		}
-	}
-
-//	static void delete(Contact personne)
-//	{
-//		Transaction tx = session.beginTransaction();
-//		session.delete(personne);
-//		tx.commit();
-//	}
-//
-	public static void save(Inscriptions inscri)
-	{
-		
-	     EntityManagerFactory entityManagerFactory = null;
-	        EntityManager entityManager = null;
-	        try {
-	        	
-	        	entityManagerFactory = Persistence.createEntityManagerFactory("WebStore");
-	        	entityManager = entityManagerFactory.createEntityManager();
-	        	
-	        	Competition art = entityManager.find(Competition.class,1);
-	        	
-	        	Transaction tx = session.beginTransaction();
-	    		for ( Object Compet: inscri.getCompetitions().toArray()) {
-	    			entityManager.persist(Compet);
-	    		}
-	    	
-	    		
-	    		
-	    		tx.commit();
-	        	
-	        } finally {
-	            if ( entityManager != null ) entityManager.close();
-	            if ( entityManagerFactory != null ) entityManagerFactory.close();
-	        }
-	}
-//		session.save(competition);
-//	@SuppressWarnings("unchecked")
-//	static java.util.List<Contact> refreshList()
-//	{
-//		Query query = session.createQuery("from Contact");
-//		return query.list();
-//	}
-
-
+	 private static EntityManagerFactory hiber = null;
+	 private static EntityManager mysql = null;
+	
+	 public static void init()
+	 {
+		 
+	  try
+	  {
+		hiber = Persistence.createEntityManagerFactory("WebStore");// UTILISATION DE LA PERSISTENCE XML DANS LE META INF POUR SE CONNECTER A LA BDD
+	    mysql = hiber.createEntityManager();
+	  }
+	  catch (HibernateException ex)
+	  {
+	   throw new RuntimeException("Problmysqle de configuration : "
+	     + ex.getMessage(), ex);
+	  }
+	 }
+	
+	 public static void open()
+	 {
+	  if (mysql == null)
+	   init();
+	 }
+	
+	 public static void close()
+	 {
+	  if (hiber != null && mysql != null )
+	   mysql.close();
+	   hiber.close();
+	 }
+	
+	 public static void delete(Object o)
+	 {
+	  EntityTransaction transaction = mysql.getTransaction();
+	  transaction.begin();
+	  mysql.remove(o);
+	  transaction.commit();
+	  transaction = null;
+	 }
+	
+	 public static void save(Object o)
+	 {
+		 EntityTransaction transaction = mysql.getTransaction();
+		 transaction.begin();
+		 mysql.persist(o);
+		 transaction.commit();
+		 transaction = null;
+	
+	 }
 }

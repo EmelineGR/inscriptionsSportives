@@ -44,15 +44,8 @@ public class dialogue
 		return new Option("Quitter et enregistrer", "qe", 
 				() -> 
 				{
-					try
-					{
-						Passerelle.save(dinscriptions);
-						Action.QUIT.optionSelected();
-					} 
-					catch (IOException e)
-					{
-						System.out.println("Impossible d'effectuer la sauvegarde");
-					}
+					Passerelle.save(dinscriptions);
+					Action.QUIT.optionSelected();
 				}
 			);
 	}

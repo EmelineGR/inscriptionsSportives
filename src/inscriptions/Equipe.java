@@ -5,8 +5,6 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.persistence.*;
 /**
  * Représente une Equipe. C'est-à-dire un ensemble de personnes pouvant 
@@ -14,10 +12,13 @@ import javax.persistence.*;
  * 
  */
 @Entity @Table( name = "Equipe")
+@PrimaryKeyJoinColumn ( name = "Num_candidat " )// HIBERNATE VA CHERCHER NUM_CANDIDAT ET EN FAIRE LA CLE PRIMAIRE DE EQUIPE DONC LA RELATION MERE ,FILLE
 public class Equipe extends Candidat
 {
 	@Transient
 	private static final long serialVersionUID = 4147819927233466035L;
+	 @ManyToMany(cascade = { CascadeType.ALL })
+		@OrderBy("Num_candidat ASC")// je sais pas pourquoi mais d'apres l'erreur " A sorted collection must define and ordering or sorting" il faut mettre un ordre a cette relation
 	private SortedSet<Personne> membres = new TreeSet<>();
 	
 	Equipe(Inscriptions inscriptions, String nom)
@@ -25,6 +26,9 @@ public class Equipe extends Candidat
 		super(inscriptions, nom);
 	}
 
+	Equipe(){
+		//CONTRUSCTEUR FOR HIBERNATE
+	}
 	/**
 	 * Retourne l'ensemble des personnes formant l'équipe.
 	 */

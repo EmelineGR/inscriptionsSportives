@@ -10,13 +10,18 @@ import javax.persistence.*;
 /**
  * Représente une personne physique pouvant s'inscrire à une compétition.
  */
-
+@Entity @Table( name = "Personne")
+@PrimaryKeyJoinColumn ( name = " num_candidat " )
 public class Personne extends Candidat
 {
 	@Transient
 	private static final long serialVersionUID = 4434646724271327254L;
+	
 	private String prenom, mail;
 	
+	@ManyToMany ( cascade=CascadeType.ALL)
+	@JoinTable ( name ="composer" , joinColumns  =  @JoinColumn ( name="num_candidat_Personne"),
+    inverseJoinColumns=@JoinColumn ( name="Num_candidat_Equipe"))
 	private Set<Equipe> equipes;
 	
 	Personne(Inscriptions inscriptions, String nom, String prenom, String mail)
@@ -28,7 +33,9 @@ public class Personne extends Candidat
 	}
 
 
-	
+	Personne(){
+		//constructeur for hibernate
+	}
 	/**
 	 * Retourne le prénom de la personne.
 	 * @return

@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 
 import org.hibernate.HibernateException;
 
+import inscriptions.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -71,7 +72,7 @@ public abstract class Passerelle
 		 SortedSet<inscriptions.Competition> list = inscri.getCompetitions();
 		 for (inscriptions.Competition item : list) {	
 			 System.out.println(item);
-		 savex(new hibernate.Competition(item.getNom(), item.getDateCloture()));
+		 savex(item);
 		 }
 		 
 	 }
@@ -81,7 +82,7 @@ public abstract class Passerelle
 		 SortedSet<inscriptions.Equipe> list = inscri.getEquipes();
 		 for (inscriptions.Equipe item : list) {	
 			 System.out.println(item);
-		 savex(new hibernate.Equipe(item.getNom()));
+			 savex(item);
 		 }
 		 
 	 }
@@ -91,7 +92,7 @@ public abstract class Passerelle
 		 SortedSet<inscriptions.Personne> list = inscri.getPersonnes();
 		 for (inscriptions.Personne item : list) {	
 			 System.out.println(item);
-		 savex(new hibernate.Personne(item.getPrenom(),item.getNom(),item.getMail()));
+			 savex(item);
 		 }
 		 
 	 }

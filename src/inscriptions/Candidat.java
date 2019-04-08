@@ -15,8 +15,8 @@ import javax.persistence.Table;
  * Candidat à un événement sportif, soit une personne physique, soit une équipe.
  *
  */
-@Entity @Table( name = "Candidat")
-@Inheritance(strategy=InheritanceType.JOINED)
+@Entity @Table( name = "Candidat")// NOM DE LA TABLE
+@Inheritance(strategy=InheritanceType.JOINED)// DIT QUE CETTE TABLE EST MERE D'AUTRE TABLE dans hibernate
 public abstract class Candidat implements Comparable<Candidat>, Serializable
 {
 	
@@ -32,8 +32,8 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	private String nom;
 	
     @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(name = "constituer", joinColumns = @JoinColumn(name = "Num_candidat"),
-    inverseJoinColumns = @JoinColumn(name = "Num_Compet"))
+    @JoinTable(name = "constituer", joinColumns = @JoinColumn(name = "Num_candidat"),// SERT A CREER UN TABLE CONSTITUER AVEC LA COLUMN NUM CANDIDAT ET NUM_COMPET
+    inverseJoinColumns = @JoinColumn(name = "Num_Compet"))// voir video https://www.youtube.com/watch?v=zbH59X281f4&t=324s
 	private Set<Competition> competitions;
 	
 	Candidat(Inscriptions inscriptions, String nom)

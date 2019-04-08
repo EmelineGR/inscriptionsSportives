@@ -21,9 +21,14 @@ public class Competition implements Comparable<Competition>, Serializable
 	@Transient
 	private Inscriptions inscriptions;
 	
+    @Id  @GeneratedValue ( strategy = GenerationType . IDENTITY )// cle primaire avec generation auto de la bdd
+    private int Num_Compet ;
+    
 	private String nom;
 	
-	@ManyToMany(mappedBy="competitions", cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(name = "constituer", joinColumns = @JoinColumn(name = "Num_Compet"),// SERT A CREER UN TABLE CONSTITUER AVEC LA COLUMN NUM CANDIDAT ET NUM_COMPET
+    inverseJoinColumns = @JoinColumn(name = "Num_candidat"))// voir video https://www.youtube.com/watch?v=zbH59X281f4&t=324s
 	private Set<Candidat> candidats;
 	  
 	private LocalDate dateCloture;
@@ -37,7 +42,9 @@ public class Competition implements Comparable<Competition>, Serializable
 		this.dateCloture = dateCloture;
 		candidats = new TreeSet<>();
 	}
-	
+	Competition(){
+		//constructeur for hibernate
+	}
 	/**
 	 * Retourne le nom de la compétition.
 	 * @return

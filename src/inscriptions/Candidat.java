@@ -1,20 +1,39 @@
 package inscriptions;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+
 /**
  * Candidat à un événement sportif, soit une personne physique, soit une équipe.
  *
  */
-
+@Entity @Table( name = "Candidat")
+@Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Candidat implements Comparable<Candidat>, Serializable
 {
+	
+	@Transient // sa veux dire que cette variable ne sera pas prit en compte dans hibernate
 	private static final long serialVersionUID = -6035399822298694746L;
+	@Transient
 	private Inscriptions inscriptions;
+	
+	
+	@Id @GeneratedValue( strategy=GenerationType.IDENTITY )
+	private int Num_candidat;
+	
 	private String nom;
+	
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(name = "constituer", joinColumns = @JoinColumn(name = "Num_candidat"),
+    inverseJoinColumns = @JoinColumn(name = "Num_Compet"))
 	private Set<Competition> competitions;
 	
 	Candidat(Inscriptions inscriptions, String nom)
@@ -24,6 +43,9 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 		competitions = new TreeSet<>();
 	}
 
+	Candidat(){
+		// constructeur pour hibernate
+	}
 	/**
 	 * Retourne le nom du candidat.
 	 * @return

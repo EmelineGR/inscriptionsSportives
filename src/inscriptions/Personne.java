@@ -1,8 +1,11 @@
 package inscriptions;
 
 import java.util.Collections;
+
 import java.util.Set;
 import java.util.TreeSet;
+
+import javax.persistence.*;
 
 /**
  * Représente une personne physique pouvant s'inscrire à une compétition.
@@ -10,8 +13,10 @@ import java.util.TreeSet;
 
 public class Personne extends Candidat
 {
+	@Transient
 	private static final long serialVersionUID = 4434646724271327254L;
 	private String prenom, mail;
+	
 	private Set<Equipe> equipes;
 	
 	Personne(Inscriptions inscriptions, String nom, String prenom, String mail)
@@ -22,6 +27,8 @@ public class Personne extends Candidat
 		equipes = new TreeSet<>();
 	}
 
+
+	
 	/**
 	 * Retourne le prénom de la personne.
 	 * @return

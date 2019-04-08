@@ -1,23 +1,31 @@
 package inscriptions;
 
 import java.io.Serializable;
+
 import java.util.Collections;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.persistence.*;
 /**
  * Représente une compétition, c'est-à-dire un ensemble de candidats 
  * inscrits à un événement, les inscriptions sont closes à la date dateCloture.
  *
  */
-
+@Entity @Table( name = "Competition")
 public class Competition implements Comparable<Competition>, Serializable
 {
+	@Transient
 	private static final long serialVersionUID = -2882150118573759729L;
+	@Transient
 	private Inscriptions inscriptions;
+	
 	private String nom;
+	
+	@ManyToMany(mappedBy="competitions", cascade = CascadeType.PERSIST)
 	private Set<Candidat> candidats;
+	  
 	private LocalDate dateCloture;
 	private boolean enEquipe = false;
 

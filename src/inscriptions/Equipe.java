@@ -5,14 +5,18 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.*;
 /**
  * Représente une Equipe. C'est-à-dire un ensemble de personnes pouvant 
  * s'inscrire à une compétition.
  * 
  */
-
+@Entity @Table( name = "Equipe")
 public class Equipe extends Candidat
 {
+	@Transient
 	private static final long serialVersionUID = 4147819927233466035L;
 	private SortedSet<Personne> membres = new TreeSet<>();
 	

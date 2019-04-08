@@ -14,11 +14,6 @@ import inscriptions.Personne;
 
 class TestHibernate {
 	
-	@Test
-	 public final void test() {
-		Passerelle.open();
-		hibernate.Competition emeline = new hibernate.Competition();
-		Passerelle.save(emeline);
-	}
+
 
 }

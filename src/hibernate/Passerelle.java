@@ -78,10 +78,10 @@ public abstract class Passerelle
 	 
 	 public static void InitEquipes(Inscriptions inscri)
 	 {
-		 SortedSet<inscriptions.Competition> list = inscri.getCompetitions();
-		 for (inscriptions.Competition item : list) {	
+		 SortedSet<inscriptions.Equipe> list = inscri.getEquipes();
+		 for (inscriptions.Equipe item : list) {	
 			 System.out.println(item);
-		 savex(new hibernate.Competition(item.getNom(), item.getDateCloture()));
+		 savex(new hibernate.Equipe(item.getNom()));
 		 }
 		 
 	 }
@@ -91,7 +91,7 @@ public abstract class Passerelle
 		 SortedSet<inscriptions.Personne> list = inscri.getPersonnes();
 		 for (inscriptions.Personne item : list) {	
 			 System.out.println(item);
-		 savex(new hibernate.Competition(item.);
+		 savex(new hibernate.Personne(item.getPrenom(),item.getNom(),item.getMail()));
 		 }
 		 
 	 }

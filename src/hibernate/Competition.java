@@ -30,10 +30,6 @@ class Competition
 		this.enEquipe = enEquipe;
 	}
 
-	Competition()
-	{
-	}
-
 	public Competition(String Nom_Competition, LocalDate DateCloture_Comp)
 	{
 		this.Nom_Competition = Nom_Competition;

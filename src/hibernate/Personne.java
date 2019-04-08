@@ -15,15 +15,14 @@ class Personne
 	private String nom;
 
 	private String prenom;
+	
+	private String mail;
 
-	Personne()
-	{
-	}
-
-	public Personne(String prenom, String nom)
+	public Personne(String prenom, String nom, String mail)
 	{
 		this.nom = nom;
 		this.prenom = prenom;
+		this.setMail(mail);
 	}
 
 	int getNum()
@@ -55,10 +54,19 @@ class Personne
 	{
 		this.prenom = prenom;
 	}
+	
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
 
 	@Override
 	public String toString()
 	{
 		return prenom + " " + nom;
 	}
+
 }

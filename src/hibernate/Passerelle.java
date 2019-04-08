@@ -1,5 +1,7 @@
 package hibernate;
-
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -9,8 +11,9 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-
-abstract class Passerelle
+import inscriptions.Inscriptions;
+import hibernate.consolejpa;
+public class Passerelle
 {
 	private static Session session = null;
 
@@ -40,13 +43,33 @@ abstract class Passerelle
 //		tx.commit();
 //	}
 //
-	static void save(Personne personne)
+	public static void save(Inscriptions inscri)
 	{
-		Transaction tx = session.beginTransaction();
-		session.save(personne);
-		tx.commit();
+		
+	     EntityManagerFactory entityManagerFactory = null;
+	        EntityManager entityManager = null;
+	        try {
+	        	
+	        	entityManagerFactory = Persistence.createEntityManagerFactory("WebStore");
+	        	entityManager = entityManagerFactory.createEntityManager();
+	        	
+	        	Competition art = entityManager.find(Competition.class,1);
+	        	
+	        	Transaction tx = session.beginTransaction();
+	    		for ( Object Compet: inscri.getCompetitions().toArray()) {
+	    			entityManager.persist(Compet);
+	    		}
+	    	
+	    		
+	    		
+	    		tx.commit();
+	        	
+	        } finally {
+	            if ( entityManager != null ) entityManager.close();
+	            if ( entityManagerFactory != null ) entityManagerFactory.close();
+	        }
 	}
-//
+//		session.save(competition);
 //	@SuppressWarnings("unchecked")
 //	static java.util.List<Contact> refreshList()
 //	{

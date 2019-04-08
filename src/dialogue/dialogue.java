@@ -1,5 +1,5 @@
 package dialogue;
-
+import hibernate.Passerelle;
 import java.io.IOException;
 
 import commandLineMenus.*;
@@ -46,7 +46,7 @@ public class dialogue
 				{
 					try
 					{
-						dinscriptions.sauvegarder();
+						Passerelle.save(dinscriptions);
 						Action.QUIT.optionSelected();
 					} 
 					catch (IOException e)

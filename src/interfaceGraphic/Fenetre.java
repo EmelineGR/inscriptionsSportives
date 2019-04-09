@@ -34,12 +34,7 @@ public class Fenetre
 		return frame;
 	}
 	
-	private void enableFenetre(boolean b)
-	{
-		frame.setEnabled(b);
-	}
-	
-	private JPanel getAccueilPanel()
+	public JPanel getAccueilPanel()
 	{
 		JPanel panel = new JPanel();
 		
@@ -51,21 +46,21 @@ public class Fenetre
 		return panel;
 	}
 	
-	private JPanel getEquipesPanel()
+	public JPanel getEquipesPanel()
 	{
 		JPanel panel = new JPanel();
 			
 		return panel;
 	}
 
-	private JPanel getPersonnesPanel()
+	public JPanel getPersonnesPanel()
 	{
 		JPanel panel = new JPanel();
 		
 		return panel;
 	}
 	
-	private JPanel getCompetitionsPanel()
+	public JPanel getCompetitionsPanel()
 	{
 		JPanel panel = new JPanel();
 		

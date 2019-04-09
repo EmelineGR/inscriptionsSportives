@@ -8,6 +8,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import javax.persistence.*;
+
+import hibernate.Passerelle;
 /**
  * Représente une compétition, c'est-à-dire un ensemble de candidats 
  * inscrits à un événement, les inscriptions sont closes à la date dateCloture.
@@ -24,6 +26,7 @@ public class Competition implements Comparable<Competition>, Serializable
     @Id  @GeneratedValue ( strategy = GenerationType . IDENTITY )// cle primaire avec generation auto de la bdd
     private int Num_Compet ;
     
+	@Column (name="nom")
 	private String nom;
 	
     @ManyToMany(cascade = { CascadeType.ALL })
@@ -31,7 +34,9 @@ public class Competition implements Comparable<Competition>, Serializable
     inverseJoinColumns = @JoinColumn(name = "Num_candidat"))// voir video https://www.youtube.com/watch?v=zbH59X281f4&t=324s
 	private Set<Candidat> candidats;
 	  
+	@Column (name="dateCloture")
 	private LocalDate dateCloture;
+	@Column (name="enEquipe")
 	private boolean enEquipe = false;
 
 	Competition(Inscriptions inscriptions, String nom, LocalDate dateCloture, boolean enEquipe)
@@ -41,6 +46,7 @@ public class Competition implements Comparable<Competition>, Serializable
 		this.nom = nom;
 		this.dateCloture = dateCloture;
 		candidats = new TreeSet<>();
+		Passerelle.savex(this);
 	}
 	Competition(){
 		//constructeur for hibernate
@@ -192,6 +198,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public boolean remove(Candidat candidat)
 	{
+		Passerelle.delete(this);
 		candidat.remove(this);
 		return candidats.remove(candidat);
 	}

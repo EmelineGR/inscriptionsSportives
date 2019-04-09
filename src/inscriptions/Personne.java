@@ -11,15 +11,17 @@ import javax.persistence.*;
  * Représente une personne physique pouvant s'inscrire à une compétition.
  */
 @Entity @Table( name = "Personne")
-@PrimaryKeyJoinColumn ( name = " num_candidat " )
+@PrimaryKeyJoinColumn ( name="Num_candidat" )
 public class Personne extends Candidat
 {
 	@Transient
 	private static final long serialVersionUID = 4434646724271327254L;
+	@Column (name="prenom")
+	private String prenom;
+	@Column (name="mail")
+	private String mail;
 	
-	private String prenom, mail;
-	
-	@ManyToMany ( cascade=CascadeType.ALL)
+	@ManyToMany ( cascade=CascadeType.ALL )//Modifie 
 	@JoinTable ( name ="composer" , joinColumns  =  @JoinColumn ( name="num_candidat_Personne"),
     inverseJoinColumns=@JoinColumn ( name="Num_candidat_Equipe"))
 	private Set<Equipe> equipes;

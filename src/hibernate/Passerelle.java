@@ -52,11 +52,14 @@ public abstract class Passerelle
 
 	 public static void delete(Object o)
 	 {
+		 Passerelle.init();
+		 Passerelle.open();
 	  EntityTransaction transaction = mysql.getTransaction();
 	  transaction.begin();
 	  mysql.remove(o);
 	  transaction.commit();
 	  transaction = null;
+	  Passerelle.close();
 	 }
 	
 	 public static void InitSave(Inscriptions inscri)
@@ -100,11 +103,14 @@ public abstract class Passerelle
 	 
 	 public static void savex(Object o)
 	 {
+		 Passerelle.init();
+		 Passerelle.open();
 		 EntityTransaction transaction = mysql.getTransaction();
 		 transaction.begin();
 		 mysql.persist(o);
 		 transaction.commit();
 		 transaction = null;
+		 Passerelle.close();
 	
 	 }
 }

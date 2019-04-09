@@ -11,6 +11,7 @@
              <class>inscriptions.Candidat</class>
              <class>inscriptions.Equipe</class>
              <class>inscriptions.Personne</class>
+             <class>inscriptions.Inscriptions</class>
                     
         
         <properties>

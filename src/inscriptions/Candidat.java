@@ -6,10 +6,7 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+import hibernate.Passerelle;
 
 /**
  * Candidat à un événement sportif, soit une personne physique, soit une équipe.
@@ -29,6 +26,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	@Id @GeneratedValue( strategy=GenerationType.IDENTITY )
 	private int Num_candidat;
 	
+	@Column (name="nom")
 	private String nom;
 	
     @ManyToMany(cascade = { CascadeType.ALL })
@@ -41,6 +39,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 		this.inscriptions = inscriptions;	
 		this.nom = nom;
 		competitions = new TreeSet<>();
+		Passerelle.savex(this);
 	}
 
 	Candidat(){
@@ -83,6 +82,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 
 	boolean remove(Competition competition)
 	{
+		Passerelle.delete(this);
 		return competitions.remove(competition);
 	}
 
@@ -93,6 +93,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	public void delete()
 	{
 		for (Competition c : competitions)
+			
 			c.remove(this);
 		inscriptions.delete(this);
 	}

@@ -21,10 +21,7 @@ public class consolejpa {
 			Equipe testEquipe = inscriptions.createEquipe("Les Manouches");
 			Competition testcompetition2 = inscriptions.createCompetition("Competition", null, false);
 			
-			Passerelle.init();
-			Passerelle.open();
-			Passerelle.savex(test);
-			Passerelle.close();
+		
 			
 			
 

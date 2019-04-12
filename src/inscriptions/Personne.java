@@ -7,31 +7,36 @@ import java.util.TreeSet;
 
 import javax.persistence.*;
 
+import hibernate.Passerelle;
+
 /**
  * Représente une personne physique pouvant s'inscrire à une compétition.
  */
-@Entity @Table( name = "Personne")
-@PrimaryKeyJoinColumn ( name="Num_candidat" )
+@Entity @Table(name="Personne")
+@PrimaryKeyJoinColumn(name="num_candidat")
 public class Personne extends Candidat
 {
 	@Transient
 	private static final long serialVersionUID = 4434646724271327254L;
-	@Column (name="prenom")
+	@Transient
+	private Inscriptions inscriptions;
+	 @Column (name="prenom")
 	private String prenom;
-	@Column (name="mail")
+	 @Column (name="mail")
 	private String mail;
-	
-	@ManyToMany ( cascade=CascadeType.ALL )//Modifie 
-	@JoinTable ( name ="composer" , joinColumns  =  @JoinColumn ( name="num_candidat_Personne"),
-    inverseJoinColumns=@JoinColumn ( name="Num_candidat_Equipe"))
+	 
+	@ManyToMany( cascade = CascadeType.PERSIST)
+	@JoinTable(name = "composer", joinColumns = @JoinColumn(name = "num_candidat_Personne"),
+    inverseJoinColumns = @JoinColumn(name = "num_candidat_Equipe"))
 	private Set<Equipe> equipes;
-	
+	 
 	Personne(Inscriptions inscriptions, String nom, String prenom, String mail)
 	{
 		super(inscriptions, nom);
 		this.prenom = prenom;
 		this.mail = mail;
 		equipes = new TreeSet<>();
+
 	}
 
 

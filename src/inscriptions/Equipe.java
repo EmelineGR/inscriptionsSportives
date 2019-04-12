@@ -13,21 +13,24 @@ import hibernate.Passerelle;
  * s'inscrire à une compétition.
  * 
  */
-@Entity @Table( name = "Equipe")
-@PrimaryKeyJoinColumn ( name = "Num_candidat" )// HIBERNATE VA CHERCHER NUM_CANDIDAT ET EN FAIRE LA CLE PRIMAIRE DE EQUIPE DONC LA RELATION MERE ,FILLE
+@Entity @Table(name="Equipe")
+@PrimaryKeyJoinColumn(name="num_candidat")// HIBERNATE VA CHERCHER NUM_CANDIDAT ET EN FAIRE LA CLE PRIMAIRE DE EQUIPE DONC LA RELATION MERE ,FILLE
 public class Equipe extends Candidat
 {
 	@Transient
 	private static final long serialVersionUID = 4147819927233466035L;
-	@ManyToMany ( cascade=CascadeType.ALL )
-		@OrderBy("Num_candidat ASC")// je sais pas pourquoi mais d'apres l'erreur " A sorted collection must define and ordering or sorting" il faut mettre un ordre a cette relation
+	@Transient
+	private  Inscriptions inscriptions;
+	@ManyToMany( cascade = CascadeType.PERSIST)
+	@OrderBy("num_candidat asc")// je sais pas pourquoi mais d'apres l'erreur " A sorted collection must define and ordering or sorting" il faut mettre un ordre a cette relation
 	private SortedSet<Personne> membres = new TreeSet<>();
 	
+
 	Equipe(Inscriptions inscriptions, String nom)
 	{
 		super(inscriptions, nom);
-		Passerelle.savex(this);
 		
+
 	}
 
 	Equipe(){

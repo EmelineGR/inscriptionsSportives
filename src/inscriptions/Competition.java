@@ -15,30 +15,25 @@ import hibernate.Passerelle;
  * inscrits à un événement, les inscriptions sont closes à la date dateCloture.
  *
  */
-@Entity @Table( name = "Competition")
+@Entity @Table(name="Competition")
 public class Competition implements Comparable<Competition>, Serializable
 {
+	
 	@Transient
 	private static final long serialVersionUID = -2882150118573759729L;
 	@Transient
 	private Inscriptions inscriptions;
-	
-    @Id  @GeneratedValue ( strategy = GenerationType . IDENTITY )// cle primaire avec generation auto de la bdd
-    private int Num_Compet ;
-    
-	@Column (name="nom")
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY )
+	private int NumCompet;
+	@Column (name="LibelleCompet")
 	private String nom;
-	
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(name = "constituer", joinColumns = @JoinColumn(name = "Num_Compet"),// SERT A CREER UN TABLE CONSTITUER AVEC LA COLUMN NUM CANDIDAT ET NUM_COMPET
-    inverseJoinColumns = @JoinColumn(name = "Num_candidat"))// voir video https://www.youtube.com/watch?v=zbH59X281f4&t=324s
+    @ManyToMany(cascade = CascadeType.PERSIST)
 	private Set<Candidat> candidats;
-	  
-	@Column (name="dateCloture")
+	 @Column (name="Date_cloture")
 	private LocalDate dateCloture;
-	@Column (name="enEquipe")
+	 @Column (name="EstEnEquipe")
 	private boolean enEquipe = false;
-
+	
 	Competition(Inscriptions inscriptions, String nom, LocalDate dateCloture, boolean enEquipe)
 	{
 		this.enEquipe = enEquipe;
@@ -46,7 +41,7 @@ public class Competition implements Comparable<Competition>, Serializable
 		this.nom = nom;
 		this.dateCloture = dateCloture;
 		candidats = new TreeSet<>();
-		Passerelle.savex(this);
+
 	}
 	Competition(){
 		//constructeur for hibernate

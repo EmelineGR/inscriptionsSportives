@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import hibernate.Passerelle;
+
 /**
  * Point d'entrée dans l'application, un seul objet de type Inscription
  * permet de gérer les compétitions, candidats (de type equipe ou personne)
@@ -147,13 +149,21 @@ public class Inscriptions implements Serializable
 	public static Inscriptions getInscriptions()
 	{
 		
+		
+
+
 		if (inscriptions == null)
-		{
-			inscriptions = readObject();
+		{	
+			
+			//inscriptions = readObject();
+			inscriptions = hibernate.Passerelle.Selectquery(inscriptions);
 			if (inscriptions == null)
 				inscriptions = new Inscriptions();
+		
 		}
+		
 		return inscriptions;
+		
 	}
 
 	/**
@@ -208,9 +218,11 @@ public class Inscriptions implements Serializable
 	 * @throws IOException 
 	 */
 	
-	public void sauvegarder() throws IOException
+	
+	public void sauvegarder(inscriptions.Inscriptions inscri) throws IOException
 	{
-		ObjectOutputStream oos = null;
+		Passerelle.Saving(inscri);
+	/*	ObjectOutputStream oos = null;
 		try
 		{
 			FileOutputStream fis = new FileOutputStream(FILE_NAME);
@@ -230,6 +242,9 @@ public class Inscriptions implements Serializable
 			} 
 			catch (IOException e){}
 		}
+*/
+	
+	
 	}
 	
 	@Override
@@ -242,27 +257,15 @@ public class Inscriptions implements Serializable
 	public static void main(String[] args)
 	{
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
-		inscriptions.reinitialiser();
+	
 		Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes", LocalDate.of(2019, 12, 1), false);
 		
 		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
 				boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
 		flechettes.add(tony);
 		Equipe lesManouches = inscriptions.createEquipe("Les Manouches");
-		lesManouches.add(boris);
-		lesManouches.add(tony);
-		System.out.println(inscriptions);
-		lesManouches.delete();
-		System.out.println(inscriptions);
-	
+		System.out.println(inscriptions.getPersonnes());
 
-		try
-		{
-			inscriptions.sauvegarder();
-		} 
-		catch (IOException e)
-		{
-			System.out.println("Sauvegarde impossible." + e);
-		}
+		Passerelle.Saving(inscriptions);
 	}
 }

@@ -12,34 +12,31 @@ import hibernate.Passerelle;
  * Candidat à un événement sportif, soit une personne physique, soit une équipe.
  *
  */
-@Entity @Table( name = "Candidat")// NOM DE LA TABLE
-@Inheritance(strategy=InheritanceType.JOINED)// DIT QUE CETTE TABLE EST MERE D'AUTRE TABLE dans hibernate
+@Entity @Table(name="Candidat")// CLASS = NEW ENTITER CANDIDAT
+@Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Candidat implements Comparable<Candidat>, Serializable
 {
-	
-	@Transient // sa veux dire que cette variable ne sera pas prit en compte dans hibernate
+	@Transient
 	private static final long serialVersionUID = -6035399822298694746L;
+	
 	@Transient
 	private Inscriptions inscriptions;
-	
-	
-	@Id @GeneratedValue( strategy=GenerationType.IDENTITY )
-	private int Num_candidat;
-	
-	@Column (name="nom")
-	private String nom;
-	
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(name = "constituer", joinColumns = @JoinColumn(name = "Num_candidat"),// SERT A CREER UN TABLE CONSTITUER AVEC LA COLUMN NUM CANDIDAT ET NUM_COMPET
-    inverseJoinColumns = @JoinColumn(name = "Num_Compet"))// voir video https://www.youtube.com/watch?v=zbH59X281f4&t=324s
+    @Id @GeneratedValue( strategy=GenerationType.IDENTITY )// cle primaire avec generation gerer par la bdd
+	private int num_candidat;
+	@Column (name="nom_candidat")// column est obligatoire permet de mapper les column de la bdd
+    private String nom;
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "constituer", joinColumns = @JoinColumn(name = "num_candidat"),// SERT A CREER UN l'entiter CONSTITUER AVEC LA COLUMN NUM CANDIDAT ET NUM_COMPET
+    inverseJoinColumns = @JoinColumn(name = "NumCompet"))// voir video https://www.youtube.com/watch?v=zbH59X281f4&t=324s
 	private Set<Competition> competitions;
+	
 	
 	Candidat(Inscriptions inscriptions, String nom)
 	{
 		this.inscriptions = inscriptions;	
 		this.nom = nom;
 		competitions = new TreeSet<>();
-		Passerelle.savex(this);
+	
 	}
 
 	Candidat(){
@@ -82,7 +79,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 
 	boolean remove(Competition competition)
 	{
-		Passerelle.delete(this);
+		
 		return competitions.remove(competition);
 	}
 

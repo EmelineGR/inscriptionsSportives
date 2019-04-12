@@ -1,5 +1,7 @@
 package hibernate;
-import java.util.ArrayList; // import the ArrayList class
+import java.util.ArrayList;
+import javax.persistence.*;
+// import the ArrayList class
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,19 +17,25 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.SortedSet;
 
-import inscriptions.Inscriptions;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import org.hibernate.Query;
+import org.hibernate.Session;
 public abstract class Passerelle
 {
 	 private static EntityManagerFactory hiber = null;
 	 private static EntityManager mysql = null;
-	
+	 
 	 public static void init()
 	 {
 		 
 	  try
 	  {
+		 
 		hiber = Persistence.createEntityManagerFactory("WebStore");// UTILISATION DE LA PERSISTENCE XML DANS LE META INF POUR SE CONNECTER A LA BDD
 	    mysql = hiber.createEntityManager();
+	    
 	  }
 	  catch (HibernateException ex)
 	  {
@@ -36,81 +44,93 @@ public abstract class Passerelle
 	  }
 	 }
 	
-	 public static void open()
-	 {
-	  if (mysql == null)
-	   init();
-	 }
-	
-	 public static void close()
+
+	 public static void close()// si la connexion a la bdd est ouverte la ferme
 	 {
 	  if (hiber != null && mysql != null )
 	   mysql.close();
 	   hiber.close();
 	 }
 	
+	 public static Inscriptions Selectquery(inscriptions.Inscriptions inscri) {// FAIT LA REQUETE QUI MONTRE A L'UTILISATEURS TOUS LES ELEMENTS DU LA BDD
+		 init();
+	
+		List<Personne> personnes  =  mysql.createQuery("from Personne").getResultList();
+		 List<Competition> Compets  =  mysql.createQuery("from Competition").getResultList();
+		 List<Equipe> Equipes  =  mysql.createQuery("from Equipe").getResultList();
+		 close();
+		 for (Personne personne : personnes) 
+				inscri.createPersonne(personne.getNom(), personne.getPrenom(), personne.getMail());
+			
+			for (Competition Compet : Compets) 
+					inscri.createCompetition(Compet.getNom(),Compet.getDateCloture(),Compet.estEnEquipe());
+				
+			for (Equipe Equipe : Equipes) {
+					 inscri.createEquipe(Equipe.getNom());	
+				}
+			
+			return inscri;
+	 }
 
-	 public static void delete(Object o)
+	 public static void Saving(inscriptions.Inscriptions inscri) {// sauvegarde tous les elements d'inscriptions en plus de se qu'il y a dans la base
+		init();
+		 List<Personne> personnes  =  mysql.createQuery("from Personne").getResultList();
+		 List<Competition> Compets  =  mysql.createQuery("from Competition").getResultList();
+		 List<Equipe> Equipes  =  mysql.createQuery("from Equipe").getResultList();
+		
+			System.out.println(inscri.getPersonnes());
+			
+			
+			for (Personne personne : inscri.getPersonnes()) {
+				if(!personnes.contains(personne)) {
+					System.out.println((personne.getNom()));
+					savex(personne);
+				}
+	 		}
+			for (Competition Compet : inscri.getCompetitions()) {
+				if(!Compets.contains(Compet)) {
+					savex(Compet);
+				}
+	 		}
+			for (Equipe Equipe : inscri.getEquipes()) {
+				if(!Equipes.contains(Equipe)) {
+					savex(Equipe);
+				}
+	 		}
+
+			close();
+		
+	 }
+	 
+	 
+	 
+	 
+	 
+	 public static void deletex(Object o)// delete un element dans la bdd
 	 {
-		 Passerelle.init();
-		 Passerelle.open();
+	Passerelle.init();
 	  EntityTransaction transaction = mysql.getTransaction();
 	  transaction.begin();
 	  mysql.remove(o);
+	  mysql.persist(o);
 	  transaction.commit();
 	  transaction = null;
 	  Passerelle.close();
 	 }
 	
-	 public static void InitSave(Inscriptions inscri)
-	 {
-		Passerelle.init();
-		 InitCompetition(inscri);
-		 
-		Passerelle.close();
-	 }
 	 
-	 public static void InitCompetition(Inscriptions inscri)
-	 {
-		 SortedSet<inscriptions.Competition> list = inscri.getCompetitions();
-		 for (inscriptions.Competition item : list) {	
-			 System.out.println(item);
-		 savex(item);
-		 }
-		 
-	 }
-	 
-	 public static void InitEquipes(Inscriptions inscri)
-	 {
-		 SortedSet<inscriptions.Equipe> list = inscri.getEquipes();
-		 for (inscriptions.Equipe item : list) {	
-			 System.out.println(item);
-			 savex(item);
-		 }
-		 
-	 }
-	 
-	 public static void InitPersonnes(Inscriptions inscri)
-	 {
-		 SortedSet<inscriptions.Personne> list = inscri.getPersonnes();
-		 for (inscriptions.Personne item : list) {	
-			 System.out.println(item);
-			 savex(item);
-		 }
-		 
-	 }
+
 	 
 	 
-	 public static void savex(Object o)
+	 public static void savex(Object o)// sauvegarde un element dans la bdd
 	 {
-		 Passerelle.init();
-		 Passerelle.open();
+		 init();
 		 EntityTransaction transaction = mysql.getTransaction();
 		 transaction.begin();
 		 mysql.persist(o);
 		 transaction.commit();
 		 transaction = null;
-		 Passerelle.close();
+	close();
 	
 	 }
 }

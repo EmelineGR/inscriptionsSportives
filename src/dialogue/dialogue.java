@@ -12,6 +12,7 @@ public class dialogue
 	public dialogue(Inscriptions inscriptions)
 	{
 		this.dinscriptions = inscriptions;
+
 	}
 	
 	public void start()
@@ -21,6 +22,7 @@ public class dialogue
 	
 	private Menu menuPrincipal()
 	{
+		
 		Menu menu = new Menu("Gestion du personnel des ligues");
 		menu.add(new dequipe().menuEquipe());
 		menu.add(new dpersonne().menuPersonne());
@@ -44,10 +46,19 @@ public class dialogue
 		return new Option("Quitter et enregistrer", "qe", 
 				() -> 
 				{
-					
-					Passerelle.InitSave(dinscriptions);
-					Action.QUIT.optionSelected();
+					try
+					{
+			
+						dinscriptions.sauvegarder(dinscriptions);
+						Action.QUIT.optionSelected();
+					} 
+					catch (IOException e)
+					{
+						System.out.println("Impossible d'effectuer la sauvegarde");
+					}
+				
 				}
+			
 			);
 	}
 	

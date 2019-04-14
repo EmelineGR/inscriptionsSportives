@@ -148,5 +148,5 @@ inscriptions = inscriptions.recharger();
 assertFalse(inscriptions.getPersonnes().contains(josiace));	
 	}
 	
-	
+
 }

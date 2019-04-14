@@ -13,13 +13,13 @@ import hibernate.Passerelle;
  *
  */
 @Entity @Table(name="Candidat")// CLASS = NEW ENTITER CANDIDAT
-@Inheritance(strategy=InheritanceType.JOINED)// class mere
+@Inheritance(strategy=InheritanceType.JOINED)//La clé primaire de l' entité fille a également une contrainte de clé étrangère sur la clé primaire de celle mere ici
 public abstract class Candidat implements Comparable<Candidat>, Serializable
 {
 	@Transient
 	private static final long serialVersionUID = -6035399822298694746L;
 	
-	@Transient
+	@Transient// elle n'est pas prit en compte par hibernate
 	private Inscriptions inscriptions;
 	
     @Id @GeneratedValue( strategy=GenerationType.IDENTITY )// cle primaire avec generation gerer par la bdd
@@ -28,14 +28,15 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	@Column (name="nom_candidat")// column est obligatoire permet de mapper les column de la bdd
     private String nom;
 	
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "constituer", joinColumns = @JoinColumn(name = "num_candidat"),// SERT A CREER UN l'entiter CONSTITUER AVEC LA COLUMN NUM CANDIDAT ET NUM_COMPET
+    @ManyToMany(cascade = CascadeType.PERSIST)// si un champs de la bdd est supprimer et qu'il avait une cle etrangere supprime sa cle
+    @JoinTable(name = "constituer", joinColumns = @JoinColumn(name = "num_candidat"),// SERT A CREER UN l'entiter CONSTITUER AVEC LA COLUMN NUM CANDIDAT ET NUM_COMPET 
     inverseJoinColumns = @JoinColumn(name = "NumCompet"))// voir video https://www.youtube.com/watch?v=zbH59X281f4&t=324s
-	private Set<Competition> competitions;
+	private Set<Competition> competitions; 
 	
 	
 	Candidat(Inscriptions inscriptions, String nom)
 	{
+	
 		this.inscriptions = inscriptions;	
 		this.nom = nom;
 		competitions = new TreeSet<>();

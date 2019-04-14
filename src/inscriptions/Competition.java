@@ -31,7 +31,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	@Column (name="LibelleCompet")
 	private String nom;
 	
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy="competitions",cascade = CascadeType.PERSIST)
 	private Set<Candidat> candidats;
     
 	 @Column (name="Date_cloture")

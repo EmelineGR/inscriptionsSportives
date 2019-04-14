@@ -157,9 +157,8 @@ public class Inscriptions implements Serializable
 		if (inscriptions == null)
 		{	
 			inscriptions = new Inscriptions();
+			//inscriptions = readObject();
 			inscriptions = hibernate.Passerelle.Selectquery(inscriptions);
-			inscriptions = readObject();
-		
 	
 		}
 		
@@ -220,15 +219,16 @@ public class Inscriptions implements Serializable
 	 */
 	
 	
-	public void sauvegarder(inscriptions.Inscriptions inscri) throws IOException
+	public void sauvegarder() throws IOException
 	{
-		Passerelle.Saving(inscri);
+		Passerelle.Saving(this);
 	/*	ObjectOutputStream oos = null;
 		try
 		{
 			FileOutputStream fis = new FileOutputStream(FILE_NAME);
 			oos = new ObjectOutputStream(fis);
 			oos.writeObject(this);
+	
 		}
 		catch (IOException e)
 		{
@@ -243,8 +243,8 @@ public class Inscriptions implements Serializable
 			} 
 			catch (IOException e){}
 		}
-*/
-	
+
+	*/
 	
 	}
 	
@@ -261,12 +261,15 @@ public class Inscriptions implements Serializable
 	
 		Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes", LocalDate.of(2019, 12, 1), false);
 		
-		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
-				boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
+		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty");
+		Personne boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
 		flechettes.add(tony);
 		Equipe lesManouches = inscriptions.createEquipe("Les Manouches");
-		System.out.println(inscriptions.getPersonnes());
 
+		System.out.println(inscriptions.getPersonnes());
+		System.out.println(inscriptions.getEquipes());
+		System.out.println(inscriptions.getCompetitions());
 		Passerelle.Saving(inscriptions);
+		System.out.println(inscriptions.getPersonnes());
 	}
 }

@@ -49,7 +49,7 @@ public class dialogue
 					try
 					{
 			
-						dinscriptions.sauvegarder(dinscriptions);
+						dinscriptions.sauvegarder();
 						Action.QUIT.optionSelected();
 					} 
 					catch (IOException e)

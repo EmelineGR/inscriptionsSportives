@@ -35,6 +35,7 @@ public class Personne extends Candidat
 	 
 	Personne(Inscriptions inscriptions, String nom, String prenom, String mail)
 	{
+		
 		super(inscriptions, nom);
 		this.prenom = prenom;
 		this.mail = mail;
@@ -109,9 +110,13 @@ public class Personne extends Candidat
 	@Override
 	public void delete()
 	{
+		
 		super.delete();
 		for (Equipe e : equipes)
 			e.remove(this);
+		
+
+		
 	}
 	
 	@Override

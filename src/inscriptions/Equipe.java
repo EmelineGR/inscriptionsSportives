@@ -23,7 +23,7 @@ public class Equipe extends Candidat
 	@Transient
 	private  Inscriptions inscriptions;
 	
-	@ManyToMany( cascade = CascadeType.PERSIST)
+	@ManyToMany(mappedBy="equipes", cascade = CascadeType.PERSIST)
 	@OrderBy("num_candidat asc")// je sais pas pourquoi mais d'apres l'erreur " A sorted collection must define and ordering or sorting" il faut mettre un ordre a cette relation
 	private SortedSet<Personne> membres = new TreeSet<>();
 	

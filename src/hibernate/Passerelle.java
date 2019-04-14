@@ -55,7 +55,7 @@ public abstract class Passerelle
 	 public static Inscriptions Selectquery(inscriptions.Inscriptions inscri) {// FAIT LA REQUETE QUI MONTRE A L'UTILISATEURS TOUS LES ELEMENTS DU LA BDD
 		 init();
 	
-		List<Personne> personnes  =  mysql.createQuery("from Personne").getResultList();
+		 List<Personne> personnes  =  mysql.createQuery("from Personne").getResultList();//requete dans la bdd prend tous les elements de la liste personne
 		 List<Competition> Compets  =  mysql.createQuery("from Competition").getResultList();
 		 List<Equipe> Equipes  =  mysql.createQuery("from Equipe").getResultList();
 		 close();
@@ -77,9 +77,6 @@ public abstract class Passerelle
 		 List<Personne> personnes  =  mysql.createQuery("from Personne").getResultList();
 		 List<Competition> Compets  =  mysql.createQuery("from Competition").getResultList();
 		 List<Equipe> Equipes  =  mysql.createQuery("from Equipe").getResultList();
-		
-			System.out.println(inscri.getPersonnes());
-			
 			
 			for (Personne personne : inscri.getPersonnes()) {
 				if(!personnes.contains(personne)) {

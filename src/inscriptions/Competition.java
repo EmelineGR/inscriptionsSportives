@@ -193,7 +193,6 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public boolean remove(Candidat candidat)
 	{
-		Passerelle.delete(this);
 		candidat.remove(this);
 		return candidats.remove(candidat);
 	}

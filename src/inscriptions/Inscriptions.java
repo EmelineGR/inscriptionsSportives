@@ -131,12 +131,14 @@ public class Inscriptions implements Serializable
 	}
 	
 	void delete(Competition competition)
-	{
+	{	
+		Passerelle.deletex(competition);
 		competitions.remove(competition);
 	}
 	
 	void delete(Candidat candidat)
 	{
+		Passerelle.deletex(candidat);
 		candidats.remove(candidat);
 	}
 	

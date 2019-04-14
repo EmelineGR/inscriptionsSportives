@@ -13,7 +13,7 @@ import hibernate.Passerelle;
  *
  */
 @Entity @Table(name="Candidat")// CLASS = NEW ENTITER CANDIDAT
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy=InheritanceType.JOINED)// class mere
 public abstract class Candidat implements Comparable<Candidat>, Serializable
 {
 	@Transient
@@ -21,10 +21,13 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	
 	@Transient
 	private Inscriptions inscriptions;
+	
     @Id @GeneratedValue( strategy=GenerationType.IDENTITY )// cle primaire avec generation gerer par la bdd
 	private int num_candidat;
+    
 	@Column (name="nom_candidat")// column est obligatoire permet de mapper les column de la bdd
     private String nom;
+	
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "constituer", joinColumns = @JoinColumn(name = "num_candidat"),// SERT A CREER UN l'entiter CONSTITUER AVEC LA COLUMN NUM CANDIDAT ET NUM_COMPET
     inverseJoinColumns = @JoinColumn(name = "NumCompet"))// voir video https://www.youtube.com/watch?v=zbH59X281f4&t=324s

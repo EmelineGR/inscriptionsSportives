@@ -34,7 +34,7 @@ public abstract class Passerelle
 	  {
 		 
 		hiber = Persistence.createEntityManagerFactory("WebStore");// UTILISATION DE LA PERSISTENCE XML DANS LE META INF POUR SE CONNECTER A LA BDD
-	    mysql = hiber.createEntityManager();
+	    mysql = hiber.createEntityManager();// ACCES A LA CONSOLE SQL
 	    
 	  }
 	  catch (HibernateException ex)
@@ -58,7 +58,7 @@ public abstract class Passerelle
 		 List<Personne> personnes  =  mysql.createQuery("from Personne").getResultList();//requete dans la bdd prend tous les elements de la liste personne
 		 List<Competition> Compets  =  mysql.createQuery("from Competition").getResultList();
 		 List<Equipe> Equipes  =  mysql.createQuery("from Equipe").getResultList();
-		 close();
+	
 		 for (Personne personne : personnes) 
 				inscri.createPersonne(personne.getNom(), personne.getPrenom(), personne.getMail());
 			
@@ -68,8 +68,9 @@ public abstract class Passerelle
 			for (Equipe Equipe : Equipes) {
 					 inscri.createEquipe(Equipe.getNom());	
 				}
-			
+			 close();
 			return inscri;
+			
 	 }
 
 	 public static void Saving(inscriptions.Inscriptions inscri) {// sauvegarde tous les elements d'inscriptions en plus de se qu'il y a dans la base
@@ -80,7 +81,6 @@ public abstract class Passerelle
 			
 			for (Personne personne : inscri.getPersonnes()) {
 				if(!personnes.contains(personne)) {
-					System.out.println((personne.getNom()));
 					savex(personne);
 				}
 	 		}

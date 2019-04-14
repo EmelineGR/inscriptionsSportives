@@ -156,12 +156,11 @@ public class Inscriptions implements Serializable
 
 		if (inscriptions == null)
 		{	
-			
-			//inscriptions = readObject();
+			inscriptions = new Inscriptions();
 			inscriptions = hibernate.Passerelle.Selectquery(inscriptions);
-			if (inscriptions == null)
-				inscriptions = new Inscriptions();
+			inscriptions = readObject();
 		
+	
 		}
 		
 		return inscriptions;

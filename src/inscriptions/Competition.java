@@ -21,16 +21,22 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	@Transient
 	private static final long serialVersionUID = -2882150118573759729L;
+	
 	@Transient
 	private Inscriptions inscriptions;
+	
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY )
 	private int NumCompet;
+    
 	@Column (name="LibelleCompet")
 	private String nom;
+	
     @ManyToMany(cascade = CascadeType.PERSIST)
 	private Set<Candidat> candidats;
+    
 	 @Column (name="Date_cloture")
 	private LocalDate dateCloture;
+	 
 	 @Column (name="EstEnEquipe")
 	private boolean enEquipe = false;
 	

@@ -1,98 +1,26 @@
 package interfaceGraphic;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.Font;
-import java.awt.event.*;
 
 public class Fenetre
-{
-	private JFrame frame;
-	private NavBar menu;
-	
-	private final Font policeTitre = new Font("MONOSPACED", Font.BOLD, 30);
+{	
+	private JFrame fenetre;
 	
 	public Fenetre()
     {
-		menu = new NavBar(this);
+		fenetre = new JFrame();
 		
-		frame = new JFrame();
-		
-		frame.setTitle("Application");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.setLayout(null);
-		frame.setJMenuBar(menu.getMenuBar());
-		frame.setContentPane(getAccueilPanel());
-		frame.setSize(700, 500);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
+		fenetre.setTitle("Application");
+		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		fenetre.setResizable(false);
+		fenetre.setLayout(null);
+		fenetre.setSize(700, 500);
+		fenetre.setLocationRelativeTo(null);
+		fenetre.setVisible(false);
     }
 	
-	JFrame getJFrame()
+	public JFrame getFenetre()
 	{
-		return frame;
-	}
-	
-	public JPanel getAccueilPanel()
-	{
-		JPanel panel = new JPanel();
-		
-		JLabel titre = new JLabel("Inscriptions Sportives");
-		titre.setFont(policeTitre);
-		panel.add(titre, "Center");
-		panel.setBorder(new EmptyBorder(20, 0, 15, 0));
-		
-		return panel;
-	}
-	
-	public JPanel getEquipesPanel()
-	{
-		JPanel panel = new JPanel();
-			
-		return panel;
-	}
-
-	public JPanel getPersonnesPanel()
-	{
-		JPanel panel = new JPanel();
-		
-		return panel;
-	}
-	
-	public JPanel getCompetitionsPanel()
-	{
-		JPanel panel = new JPanel();
-		
-		return panel;
-	}
-	
-	private ActionListener getBoutonListener(final String label)
-	{
-		return new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				
-			}
-		};
-	}
-	
-	private JButton getBouton(String label)
-	{
-		JButton bt = null;
-		
-		switch (label)
-		{
-			case "EQUIPES": bt = getBouton("equipes"); break;
-			case "PERSONNES": bt = getBouton("personnes"); break;
-			case "COMPETITIONS": bt = getBouton("competitions");	break;
-			case "QUITTER": bt = getBouton("quitter"); break;
-			default: throw new RuntimeException("Bouton inconnue : " + label);
-		}
-		
-		bt.addActionListener(getBoutonListener(label));
-		return bt;
+		return fenetre;
 	}
 }

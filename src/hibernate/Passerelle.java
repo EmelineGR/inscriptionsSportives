@@ -86,7 +86,7 @@ public abstract class Passerelle
 	 }
 	//&&&&&&&&&&&&& FIN Petit method et fonction &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 	 
-	 
+	 /*
 	 public static void comparePersonne(Personne findguy) {// NE SERT A RIEN c'etait pour ne pas avoir 2 element identique dans la bdd
 			init();
 			 List<Personne> personnes  =  mysql.createQuery("from Personne").getResultList();
@@ -106,7 +106,7 @@ public abstract class Passerelle
 				}
 			 }
 		 }
-	 
+	 */
 	 
 	
 	 //&&&&&&&&&&&&& PULL de donnee &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -200,7 +200,7 @@ public abstract class Passerelle
 			 List<Equipe> Equipes  =  mysql.createQuery("from Equipe").getResultList();
 		
 			for (Equipe Equipe : inscri.getEquipes()) {
-				if(!Equipes.contains(Equipe.getNom())) {
+				if(!Equipes.contains(Equipe)) {
 					savex(Equipe);
 				}
 	 		}
